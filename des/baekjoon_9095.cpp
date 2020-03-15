@@ -3,22 +3,11 @@
 using namespace std;
 //1, 2, 3 더하기
 int result = 0;
-
-void dfs(int n, int sum, int count) {
-	int a, b, c;
-	if (sum == n) {
-		count++;
-		sum = 0;
-	}
-	if (sum + 1 <= n) {
-		dfs(n, sum + 1, count);
-	}
-	if (sum + 2 <= n) {
-		dfs(n, sum + 2, count);
-	}
-	if (sum + 3 <= n) {
-		dfs(n, sum + 3, count);
-	}
+void dp(int n) {
+	if (n == 0)result++;
+	if (n - 1 >= 0) { dp(n - 1); }
+	if (n - 2 >= 0) { dp(n - 2); }
+	if (n - 3 >= 0) { dp(n - 3); }
 }
 int main() {
 	int T=0; //테스트 케이스의 개수
@@ -30,8 +19,8 @@ int main() {
 		n.push_back(temp);
 	}
 	for (int i = 0; i < T; i++) {
-		dfs(n[i], 0, result);
-		cout << result << endl;
+		dp(n[i]);
+		cout << result<<endl;
 		result = 0;
 	}
 }

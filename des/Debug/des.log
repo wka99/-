@@ -1,0 +1,5 @@
+﻿  baekjoon_9095.cpp
+c:\users\yooso\desktop\유소영\멋진해커가될거야!\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_9095.cpp(8): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+c:\users\yooso\desktop\유소영\멋진해커가될거야!\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_9095.cpp(8): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
+c:\users\yooso\desktop\유소영\멋진해커가될거야!\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_9095.cpp(8): warning C4101: 'c' :참조되지 않은 지역 변수입니다.
+  des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋진해커가될거야!\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

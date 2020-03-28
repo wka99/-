@@ -184,7 +184,10 @@
     <ClCompile Include="baekjoon_1476.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="baekjoon_2290.cpp" />
+    <ClCompile Include="baekjoon_2109.cpp" />
+    <ClCompile Include="baekjoon_2290.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="baekjoon_2292.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>

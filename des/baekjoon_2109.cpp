@@ -5,17 +5,17 @@ using namespace std;
 
 int n;//강연 요청 대학수
 vector <pair<int, int>> dp;
-vector <pair<int, int>> temp;
+vector <int> temp;
 
 int greedy() {
 	int sum = 0;
 	sort(dp.begin(), dp.end());
 	for (int i = 0; i < n; i++) {
 		sum += dp[i].second;
-		temp.push_back(make_pair(dp[i].second, dp[i].first));
+		temp.push_back(dp[i].second);
 		if (temp.size() > dp[i].first) {
 			sort(temp.begin(), temp.end());
-			sum -= temp[0].first;
+			sum -= temp[0];
 			temp.erase(temp.begin());
 		}
 	}

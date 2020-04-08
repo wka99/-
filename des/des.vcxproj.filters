@@ -117,10 +117,19 @@
     <ClCompile Include="baekjoon_1181.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="baekjoon_2789.cpp">
+    <ClCompile Include="baekjoon_2609.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="baekjoon_2609.cpp">
+    <ClCompile Include="baekjoon_2798.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_9655.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_9657.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_9659.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

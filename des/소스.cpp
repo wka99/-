@@ -1,16 +1,38 @@
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <queue>
 using namespace std;
 
+int N, M;
+vector <int> student[32001];
+int degree[32001] = { 0, };
+queue <int> tmp;
+
+void topologySort() {
+	for (int i = 1; i <= N; i++) {
+		if (degree[i] == 0)
+			tmp.push(i);
+	}
+	for (int i = 1; i <= N; i++) {
+		if (tmp.empty())
+			return;
+		int x = tmp.front();
+		tmp.pop();
+		cout << x << " ";
+		for (int j = 0; j < student[x].size(); j++) {
+			if (--degree[student[x][j]] == 0) {
+				tmp.push(student[x][j]);
+			}
+		}
+	}cout << "\n";
+}
 int main() {
-	int N;
-	int number[1000] = { 0, };
-	cin >> N;
-	for (int i = 0; i < N; i++) {
-		cin >> number[i];
+	cin >> N >> M;
+	int a, b;
+	for (int i = 0; i < M; i++) {
+		cin >> a >> b;
+		degree[b]++;
+		student[a].push_back(b);
 	}
-	sort(number, number + N);
-	for (int i = 0; i < N; i++) {
-		cout << number[i] << endl;
-	}
+	topologySort();
 }

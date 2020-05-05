@@ -7,10 +7,10 @@ int main() {
 	//a-z의 아스키코드 97-122
 	int i, j, k;
 	int c = 0;
-	char text[100];
+	char text[101];
 	int flag = 0;
-	int find_alpha[100];
-	cin.getline(text, 100);
+	int find_alpha[101];
+	cin.getline(text, 101);
 	for (i = 97; i < 123; i++) {
 		for (k = 0; k < strlen(text); k++) {
 			if (int(text[k]) == i) {

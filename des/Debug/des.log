@@ -1,1 +1,4 @@
-﻿  des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe
+﻿  baekjoon_10809.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_10809.cpp(15): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_10809.cpp(8): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+  des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

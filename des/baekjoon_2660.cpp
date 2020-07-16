@@ -35,6 +35,11 @@ int main() {
 				club[j][k] = min(club[j][k],club[j][i]+club[i][k]);
 			}
 		}
+		for (int a = 1; a <= N; a++) {
+			for (int b = 1; b <= N; b++) {
+				cout << club[a][b] << " ";
+			}cout << endl;
+		}
 	}
 	int score[51];
 	int min = 100;

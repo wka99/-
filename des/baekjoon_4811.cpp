@@ -12,7 +12,6 @@ int main() {
 	int N;
 	for (int i = 0; i < 31; i++) {
 		for (int j = 0; j < 31; j++) {
-			if (D[i][j]) continue;
 			if (i == 0)
 				D[i][j] = 1;
 			else if (j == 0)

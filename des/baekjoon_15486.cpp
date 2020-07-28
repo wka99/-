@@ -9,7 +9,6 @@ int DP[1500001] = { 0, };
 
 int main() {
 	cin >> N;
-	int t, p;
 	for (int i = 1; i <= N; i++) {
 		cin >> T[i] >> P[i];
 	}

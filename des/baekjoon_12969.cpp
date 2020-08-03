@@ -16,9 +16,9 @@ bool check(int i, int a, int b, int k) {
 	D[i][a][b][k] = true; //방문 기록
 	S[i] = 'A';//문자열 뒤에 A추가
 	if (check(i + 1, a + 1, b, k)) return true;
-	S[i] = 'B';//문자열 뒤에 A추가
+	S[i] = 'B';//문자열 뒤에 B추가
 	if (check(i + 1, a, b + 1, k + a)) return true;
-	S[i] = 'C';//문자열 뒤에 A추가
+	S[i] = 'C';//문자열 뒤에 C추가
 	if (check(i + 1, a, b, k + a + b)) return true;
 	return false;
 }

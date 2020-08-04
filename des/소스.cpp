@@ -1,32 +1,54 @@
 #include <iostream>
+#include <vector>
+#include <cmath>
 using namespace std;
 
-int N, K;
-char S[31];
-int D[31][31][31][436] = { 0, };
+int N;
+int statis[21][21];
+vector <int> link;
+vector <int> start;
 
-bool check(int i, int a, int b, int k) {
-	if (i == N) {
-		if (k == K) {
-			return true;
+int check(int cur, int ind) {
+	int t1, t2;
+	t1 = 0;
+	t2 = 0;
+	if (ind == N/2) {
+		if (link.size() == 0) return -1;
+		if (start.size() == 0) return-1;
+		for (int i = 0; i < link.size(); i++) {
+			for (int j = 0; j < link.size(); j++) {
+				if (i == j) continue;
+				t1 += statis[link[i]][link[j]];
+			}
 		}
-		else
-			return false;
+		for (int i = 0; i < start.size(); i++) {
+			for (int j = 0; j < start.size(); j++) {
+				if (i == j) continue;
+				t2 += statis[start[i]][start[j]];
+			}
+		}
+		return abs(t1 - t2);
 	}
-	if (D[i][a][b][k] != 0) return false;
-	D[i][a][b][k] = 1;
-	S[i] = 'A';
-	if (check(i + 1, a + 1, b, k)) return true;
-	S[i] = 'B';
-	if (check(i + 1, a, b + 1, k + a)) return true;
-	S[i] = 'C';
-	if (check(i + 1, a, b, k + a + b)) return true;
-	return false;
+	int ans = -1;
+	for (int i = cur; i < start.size(); i++) {
+		int tmp = start[i];
+		link.push_back(tmp);
+		start.erase(start.begin() + i);
+		t1 = check(i, ind + 1);
+		if (ans == -1 || (t1 != -1 && ans > t1))
+			ans = t1;
+		link.pop_back();
+		start.insert(start.begin() + i, tmp);
+	}
+	return ans;
 }
 int main() {
-	cin >> N >> K;
-	if (check(0, 0, 0, 0))
-		cout << S << endl;
-	else
-		cout << -1 << endl;
+	cin >> N;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < N; j++) {
+			cin >> statis[i][j];
+		}
+		start.push_back(i);
+	}
+	cout << check(0, 0) << endl;
 }

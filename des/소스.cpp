@@ -1,54 +1,78 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
+#include <cstring>
+#include <queue>
+#include <algorithm>
 using namespace std;
 
-int N;
-int statis[21][21];
-vector <int> link;
-vector <int> start;
+int N, M;
+queue <pair<int, int>> virus;
+int map[9][9];
+int tmp[9][9];
+int dx[4] = { 0,0,-1,1 };
+int dy[4] = { -1,1,0,0 };
+int maxval = 0;
 
-int check(int cur, int ind) {
-	int t1, t2;
-	t1 = 0;
-	t2 = 0;
-	if (ind == N/2) {
-		if (link.size() == 0) return -1;
-		if (start.size() == 0) return-1;
-		for (int i = 0; i < link.size(); i++) {
-			for (int j = 0; j < link.size(); j++) {
-				if (i == j) continue;
-				t1 += statis[link[i]][link[j]];
+void virusSpread() {
+	int final[9][9];
+	queue <pair<int, int>> tv = virus;
+	memcpy(final, tmp, sizeof(tmp));
+	int x, y;
+	while (tv.size()) {
+		x = tv.front().first;
+		y = tv.front().second;
+		tv.pop();
+		for (int i = 0; i < 4; i++) {
+			if (x + dx[i] >= 0 && x + dx[i] < N&&y + dy[i] >= 0 && y + dy[i] < M) {
+				if (final[x + dx[i]][y + dy[i]]== 0) {
+					final[x + dx[i]][y + dy[i]] = 2;
+					tv.push({ x + dx[i], y + dy[i] });
+				}
 			}
 		}
-		for (int i = 0; i < start.size(); i++) {
-			for (int j = 0; j < start.size(); j++) {
-				if (i == j) continue;
-				t2 += statis[start[i]][start[j]];
+	}
+	int point = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (final[i][j] == 0)
+				point++;
+		}
+	}
+	if (maxval < point)
+		maxval = point;
+}
+void makeWall(int cnt) {
+	if (cnt == 3) {
+		virusSpread();
+		return;
+	}
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (tmp[i][j] == 0) {
+				tmp[i][j] = 1;
+				makeWall(cnt + 1);
+				tmp[i][j] = 0;
 			}
 		}
-		return abs(t1 - t2);
 	}
-	int ans = -1;
-	for (int i = cur; i < start.size(); i++) {
-		int tmp = start[i];
-		link.push_back(tmp);
-		start.erase(start.begin() + i);
-		t1 = check(i, ind + 1);
-		if (ans == -1 || (t1 != -1 && ans > t1))
-			ans = t1;
-		link.pop_back();
-		start.insert(start.begin() + i, tmp);
-	}
-	return ans;
 }
 int main() {
-	cin >> N;
+	cin >> N >> M;
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
-			cin >> statis[i][j];
+		for (int j = 0; j < M; j++) {
+			cin >> map[i][j];
+			if (map[i][j] == 2) {
+				virus.push({ i,j });
+			}
 		}
-		start.push_back(i);
 	}
-	cout << check(0, 0) << endl;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (map[i][j] == 0) {
+				memcpy(tmp, map, sizeof(map));
+				tmp[i][j] = 1;
+				makeWall(1);
+			}
+		}
+	}
+	cout << maxval << endl;
 }

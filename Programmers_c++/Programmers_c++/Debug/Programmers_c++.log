@@ -1,2 +1,9 @@
-﻿  타겟 넘버.cpp
+﻿  체육복.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(9): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(10): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(11): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(33): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(34): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\체육복.cpp(42): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Programmers_c++.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\Programmers_c++\Debug\Programmers_c++.exe

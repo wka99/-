@@ -36,5 +36,8 @@
     <ClCompile Include="체육복.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="문자열압축.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

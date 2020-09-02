@@ -1,34 +1,35 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <string>
 using namespace std;
 
+int answer = 1000;
+
+void check(string s, int len) {
+	string tmp = "";
+	if (len > s.size()) return;
+	for (int i = 0; i < s.size();) {
+		int cnt = 1;
+		for (int j = i+len; j < s.size(); j+=len) {
+			if (s.substr(i, len) == s.substr(j, len)) {
+				cnt++;
+			}
+			else break;
+		}
+		tmp += s.substr(i, len);
+		if (cnt > 1) tmp += to_string(cnt);
+		i += cnt * len;
+	}
+	cout << tmp << endl;
+	if (answer > tmp.length())
+		answer = tmp.length();
+	check(s, len+1);
+}
+int solution(string s) {
+	check(s, 1);
+	return answer;
+}
 int main() {
-	vector <int> v = { 1,2,3,4,5,6,7,8 };
-	vector <int> t;
-	vector <int> t2;
-
-	t.resize((int)(v.size()));
-	copy(v.begin(), v.end(), t.begin());
-	for (int i = 0; i < t.size(); i++) {
-		cout << t[i] << " ";
-	}cout << endl;
-
-	t.clear();
-	t.resize(3);
-	copy(v.begin() + 1, v.begin() + 4, t.begin());
-	for (int i = 0; i < t.size(); i++) {
-		cout << t[i] << " ";
-	}cout << endl;
-
-	t2.assign(v.begin(), v.end());
-	for (int i = 0; i < t2.size(); i++) {
-		cout << t2[i] << " ";
-	}cout << endl;
-
-	t2.clear();
-	t2.assign(v.begin() + 2, v.begin() + 5);
-	for (int i = 0; i < t2.size(); i++) {
-		cout << t2[i] << " ";
-	}cout << endl;
+	string s = "ababcdcdababcdcd";
+	cout << solution(s) << endl;
 }

@@ -1,5 +1,4 @@
-﻿  괄호변환.cpp
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\괄호변환.cpp(8): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\괄호변환.cpp(20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\괄호변환.cpp(35): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+﻿  오픈채팅방.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\오픈채팅방.cpp(14): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\오픈채팅방.cpp(41): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Programmers_c++.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\Programmers_c++\Debug\Programmers_c++.exe

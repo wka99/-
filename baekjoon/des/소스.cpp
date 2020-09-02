@@ -1,56 +1,84 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <cmath>
+#include <tuple>
 using namespace std;
 
-const int MAX = 50;
-const int INF = 2000000000;
+int N, M;
+vector<vector<int>> map(8, vector<int>(8));
+vector<tuple<int, int, int>> cctv;
+vector<int> dirs;
 
-int N, M; //도시 크기, 남길 치킨집 개수
-int map[50][50]; //도시 지도
-vector <pair<int, int>> home; //집 주소
-vector <pair<int, int>> chicken; //치킨 집 주소
-int visit[13] = { 0, }; //치킨 집 방문 여부
-int result = INF; //치킨 거리
-
-void DFS(int idx, int dept) {
-	if (dept == M) {
-		int tmpresult = 0;
-		for (int i = 0; i < home.size(); i++) {
-			int tmp = INF;
-			for (int j = 0; j < chicken.size(); j++) {
-				if (visit[j]) {
-					tmp = min(tmp, abs(chicken[j].first - home[i].first) + abs(chicken[j].second - home[i].second));
-				}
-			}
-			tmpresult += tmp;
-		}
-		result = min(result, tmpresult);
-		return;
+// 우, 하, 좌, 상 => 시계방향으로 이동할 수 있도록
+int dx[4] = { 0,1,0,-1 };
+int dy[4] = { 1,0,-1,0 };
+void check(vector<vector<int>> &tmp, int x, int y, int dir) {
+	int i = x;
+	int j = y;
+	while (i >= 0 && i < N&&j >= 0 && j < M) {
+		if (map[i][j] == 6)
+			break;
+		tmp[i][j] = map[x][y];
+		i += dx[dir];
+		j += dy[dir];
 	}
-	if (idx >= chicken.size())
-		return;
-	//치킨 집을 없애지 않는 경우
-	visit[idx] = 1;
-	DFS(idx + 1, dept + 1);
-	//없애는 경우
-	visit[idx] = 0;
-	DFS(idx + 1, dept);
+}
+int solution(int idx) {
+	if (idx == cctv.size()) {
+		vector<vector<int>> tmp = map;
+		for (int i = 0; i < cctv.size(); i++) {
+			int type, x, y;
+			tie(type, x, y) = cctv[i];
+			if(type == 1){
+				check(tmp, x, y, dirs[i]);
+			}
+			else if (type == 2) {
+				check(tmp, x, y, dirs[i]);
+				check(tmp, x, y, (dirs[i] + 2) % 4);
+			}
+			else if (type == 3) {
+				check(tmp, x, y, dirs[i]);
+				check(tmp, x, y, (dirs[i] + 1) % 4);
+			}
+			else if (type == 4) {
+				check(tmp, x, y, dirs[i]);
+				check(tmp, x, y, (dirs[i] + 1) % 4);
+				check(tmp, x, y, (dirs[i] + 2) % 4);
+			}
+			else if (type == 5) {
+				check(tmp, x, y, dirs[i]);
+				check(tmp, x, y, (dirs[i] + 1) % 4);
+				check(tmp, x, y, (dirs[i] + 2) % 4);
+				check(tmp, x, y, (dirs[i] + 3) % 4);
+			}
+		}
+		int cnt = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = 0; j < M; j++) {
+				if (tmp[i][j] == 0)
+					cnt++;
+			}
+		}
+		return cnt;
+	}
+	int result = 100;
+	for (int i = 0; i < 4; i++) {
+		dirs[idx] = i;
+		int r = solution(idx + 1);
+		result = min(r, result);
+	}
+	return result;
 }
 int main() {
 	cin >> N >> M;
 	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+		for (int j = 0; j < M; j++) {
 			cin >> map[i][j];
-			if (map[i][j] == 1) { //집
-				home.push_back({ i, j });
-			}
-			if (map[i][j] == 2) { //치킨
-				chicken.push_back({ i,j });
+			if (map[i][j] > 0 && map[i][j] < 6) {
+				cctv.push_back({ map[i][j], i, j });
+				dirs.push_back(0);
 			}
 		}
 	}
-	DFS(0, 0);
-	cout << result << endl;
+	cout << solution(0) << endl;
 }

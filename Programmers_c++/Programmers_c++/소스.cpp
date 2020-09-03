@@ -1,35 +1,40 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <bits/stdc++.h>
 using namespace std;
 
-int answer = 1000;
-
-void check(string s, int len) {
-	string tmp = "";
-	if (len > s.size()) return;
-	for (int i = 0; i < s.size();) {
-		int cnt = 1;
-		for (int j = i+len; j < s.size(); j+=len) {
-			if (s.substr(i, len) == s.substr(j, len)) {
-				cnt++;
+bool possi(vector<int> ans, int now) {
+	for(int i = 0; i < ans.size(); i++) {
+		if ((ans[i] & now) == ans[i])return false;
+	}return true;
+}
+int solution(vector<vector<string>> relation) {
+	int n = relation.size();
+	int m = relation[0].size();
+	vector<int> ans;
+	/*
+		[학번, 이름, 전공, 학년]
+		key - 학번 / 0001
+		key - 학번, 전공 / 0101
+		key - 학년, 이름 / 1010
+	*/
+	for (int i = 1; i < (1 << m); i++) { //0001 부터 1111까지
+		set<string> s;
+		for (int j = 0; j < n; j++) {
+			string now = "";
+			for (int k = 0; k < m; k++) {
+				if (i&(1 << k))now += relation[j][k];
 			}
-			else break;
+			s.insert(now);
 		}
-		tmp += s.substr(i, len);
-		if (cnt > 1) tmp += to_string(cnt);
-		i += cnt * len;
+		if (s.size() == n && possi(ans, i))
+			ans.push_back(i);
 	}
-	cout << tmp << endl;
-	if (answer > tmp.length())
-		answer = tmp.length();
-	check(s, len+1);
+	return ans.size();
 }
-int solution(string s) {
-	check(s, 1);
-	return answer;
-}
+
 int main() {
-	string s = "ababcdcdababcdcd";
-	cout << solution(s) << endl;
+	vector<vector<string>> relation = { {"100", "ryan", "music", "2"},{"200", "apeach", "math", "2"},{"300", "tube", "computer", "3"},{"400", "con", "computer", "4"},{"500", "muzi", "music", "3"},{"600", "apeach", "music", "2"} };
+	cout << solution(relation) << endl;
 }

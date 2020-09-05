@@ -1,24 +1,2 @@
-﻿  실패율.cpp
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\실패율.cpp(20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\program files (x86)\microsoft visual studio\2017\community\vc\tools\msvc\14.16.27023\include\utility(172): warning C4244: '초기화 중': '_Ty'에서 '_Ty1'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-          with
-          [
-              _Ty=int
-          ]
-          and
-          [
-              _Ty1=float
-          ]
-  c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\실패율.cpp(36): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::pair<float,int>::pair<int,int,0>(_Other1 &&,_Other2 &&) noexcept'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Other1=int,
-              _Other2=int
-          ]
-  c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\실패율.cpp(36): note: 컴파일 중인 함수 템플릿 인스턴스화 'std::pair<float,int>::pair<int,int,0>(_Other1 &&,_Other2 &&) noexcept'에 대한 참조를 확인하십시오.
-          with
-          [
-              _Other1=int,
-              _Other2=int
-          ]
+﻿  소스.cpp
   Programmers_c++.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\Programmers_c++\Debug\Programmers_c++.exe

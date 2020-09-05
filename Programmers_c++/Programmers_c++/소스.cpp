@@ -1,40 +1,67 @@
 #include <iostream>
-#include <vector>
+#include <queue>
 #include <string>
-#include <bits/stdc++.h>
 using namespace std;
 
-bool possi(vector<int> ans, int now) {
-	for(int i = 0; i < ans.size(); i++) {
-		if ((ans[i] & now) == ans[i])return false;
-	}return true;
+class treeNode {
+public:
+	int data;
+	treeNode *l = NULL;
+	treeNode *r = NULL;
+};
+void preorder(treeNode *root) { //전위순회
+	if (root == NULL)
+		return;
+	cout << root->data << " ";
+	preorder(root->l);
+	preorder(root->r);
 }
-int solution(vector<vector<string>> relation) {
-	int n = relation.size();
-	int m = relation[0].size();
-	vector<int> ans;
-	/*
-		[학번, 이름, 전공, 학년]
-		key - 학번 / 0001
-		key - 학번, 전공 / 0101
-		key - 학년, 이름 / 1010
-	*/
-	for (int i = 1; i < (1 << m); i++) { //0001 부터 1111까지
-		set<string> s;
-		for (int j = 0; j < n; j++) {
-			string now = "";
-			for (int k = 0; k < m; k++) {
-				if (i&(1 << k))now += relation[j][k];
-			}
-			s.insert(now);
-		}
-		if (s.size() == n && possi(ans, i))
-			ans.push_back(i);
+void inorder(treeNode *root) { //중위순회
+	if (root == NULL)
+		return;
+	inorder(root->l);
+	cout << root->data << " ";
+	inorder(root->r);
+}
+void postorder(treeNode *root) { //후위순회
+	if (root == NULL)
+		return;
+	postorder(root->l);
+	postorder(root->r);
+	cout << root->data << " ";
+}
+void levelorder(treeNode *root) { //레벨순회
+	queue<treeNode*>q;
+	if (root == NULL)return;
+	q.push(root);
+	while (!q.empty()) {
+		treeNode *tmp = q.front();
+		q.pop();
+		cout << tmp->data << " ";
+		if(tmp->l!=NULL)
+			q.push(tmp->l);
+		if(tmp->r!=NULL)
+			q.push(tmp->r);
 	}
-	return ans.size();
 }
-
 int main() {
-	vector<vector<string>> relation = { {"100", "ryan", "music", "2"},{"200", "apeach", "math", "2"},{"300", "tube", "computer", "3"},{"400", "con", "computer", "4"},{"500", "muzi", "music", "3"},{"600", "apeach", "music", "2"} };
-	cout << solution(relation) << endl;
+	treeNode n1, n2, n3, n4, n5, n6;
+	n1.data = 1;
+	n2.data = 2;
+	n3.data = 3;
+	n4.data = 4;
+	n5.data = 5;
+	n6.data = 6;
+	n1.l = &n2;
+	n1.r = &n3;
+	n2.l = &n4;
+	n2.r = &n5;
+	n3.l = &n6;
+	preorder(&n1);
+	cout << endl;
+	inorder(&n1);
+	cout << endl;
+	postorder(&n1);
+	cout << endl;
+	levelorder(&n1);
 }

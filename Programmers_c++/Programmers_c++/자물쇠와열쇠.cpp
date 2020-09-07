@@ -4,20 +4,23 @@
 using namespace std;
 
 //brute force
-bool check(vector<vector<int>> back, vector<vector<int>> tmpk) {
-	int a = back.size();
+bool check(vector<vector<int>> back, vector<vector<int>> tmpk, int i, int j) {
 	int b = tmpk.size();
-	for (int i = 0; i < a; i++) {
-		for (int j = 0; j < a; j++) {
-			for (int k = 0; k < b; k++) {
-				for (int l = 0; l < b; l++) {
-					if (!(back[i + k][j + l] ^ tmpk[k][l])) return false;
-				}
-			}
+	for (int k = 0; k < b; k++) {
+		for (int l = 0; l < b; l++) {
+			back[i + k][j + l] += tmpk[k][l];
+			if (back[i + k][j + l] > 1) return false;
+		}
+	}
+	for (int k = b - 1; k <= back.size() - b; k++) {
+		for (int l = b - 1; l <= back.size() - b; l++) {
+			if (back[k][l] == 1) continue;
+			return false;
 		}
 	}
 	return true;
 }
+
 vector<vector<int>> turnkey(vector<vector<int>> key) {
 	vector<vector<int>> tmp = key;
 	int x = key.size()-1;
@@ -40,7 +43,11 @@ bool solution(vector<vector<int>> key, vector<vector<int>> lock) {
 	}
 	vector<vector<int>>tmpk = key;
 	for (int x = 0; x < 4; x++) {
-		if (check(back, tmpk)) return true;
+		for (int i = 0; i <= back.size()-key.size(); i++) {
+			for (int j = 0; j <= back.size()-key.size(); j++) {
+				if (check(back, tmpk, i, j)) return true;
+			}
+		}
 		tmpk = turnkey(tmpk);
 	}
 	return answer;

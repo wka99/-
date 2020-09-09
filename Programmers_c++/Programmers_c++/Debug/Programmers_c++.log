@@ -1,10 +1,6 @@
-﻿  자물쇠와열쇠.cpp
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(15): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(16): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(28): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(39): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(40): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(46): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\자물쇠와열쇠.cpp(47): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+﻿  소스.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\소스.cpp(39): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\소스.cpp(40): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\소스.cpp(47): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\소스.cpp(48): warning C4018: '<=': signed 또는 unsigned가 일치하지 않습니다.
   Programmers_c++.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\Programmers_c++\Debug\Programmers_c++.exe

@@ -71,6 +71,86 @@ void bubble_sort(vector<int>& v) {
 		}
 	}
 }
+/*
+Divide and Conquer 방법에 바탕을 둔 정렬 방식
+주어진 리스트를 동일한 크기의 부분 리스트로 분할하고
+각 부분 리스트를 정렬한 후, 병합해나가면서 전체 리스트
+를 정렬하는 방식
+"합병 정렬"
+- 시간 복잡도
+합병 과정의 개수 log2 n 
+각 합병 과정에서의 비교 연산 개수 n개
+O(nlog2 n)
+*/
+void merge(vector<int>&v, int left, int mid, int right) {
+	vector<int> sorted(v.size(), 0);
+	int x = left;
+	int y = mid + 1;
+	int z = left;
+	while (x <= mid && y <= right) {
+		if (v[x] < v[y])sorted[z++] = v[x++];
+		else sorted[z++] = v[y++];
+	}
+	for (; x <= mid; x++) {
+		sorted[z++] = v[x];
+	}
+	for (; y <= right; y++) {
+		sorted[z++] = v[y];
+	}
+	for (int i = left; i <= right; i++) {
+		v[i] = sorted[i];
+	}
+}
+void merge_sort(vector<int>&v, int left, int right) { //리스트 분할->정렬->합병 과정
+	if (left < right) {
+		int mid = (left + right) / 2;
+		merge_sort(v, left, mid); //왼쪽 리스트 정렬
+		merge_sort(v, mid + 1, right); //오른쪽 리스트 정렬
+		merge(v, left, mid, right);//두 부분 리스트 합병
+	}
+}
+/*
+Divide and Conquer 방법을 바탕에 둔 정렬 방식
+리스트 중 하나의 수를 피벗으로 정하고 
+피벗보다 큰 수는 피벗의 오른쪽에, 작은 수는 왼쪽에
+위치하도록 한 후, 피벗을 제외한 두개의 부분 리스트에
+대하여 피벗을 정하고 정렬하는 과정을 반복하는 정렬 방식
+"퀵 정렬"
+- 시간 복잡도
+최선의 경우 = 리스트의 분할이 항상 가운데에서 이루어지는 경우
+이 경우 log2 n 개의 패스가 필요하며 각 패스에서 n번정도의 비교
+== O(nlog2 n)
+최악의 경우 = 리스트의 분할이 불균형하게 일어나는 경우
+이 경우 n개의 패스가 필요하며 각 패스에서 n번 정도의 비교
+== O(n^2)
+평균적인 경우 O(nlog2 n)
+*/
+int partition(vector<int>& v, int left, int right) {
+	int low = left + 1;
+	int high = right;
+	int pivot = v[left];
+	while (low < high) {
+		while (low <= high && pivot > v[low]) low++;
+		while (high >= low && pivot < v[high]) high--;
+		if (low < high) {
+			int tmp = v[high];
+			v[high] = v[low];
+			v[low] = tmp;
+			low++; high--;
+		}
+	}
+	int tmp = v[high];
+	v[high] = v[left];
+	v[left] = tmp;
+	return high;
+}
+void quick_sort(vector<int>&v, int left, int right) {
+	if (left < right) {
+		int q = partition(v, left, right);
+		quick_sort(v, left, q - 1);
+		quick_sort(v, q + 1, right);
+	}
+}
 void print(vector<int> &v) {
 	for (int i = 0; i < v.size(); i++)
 		cout << v[i] << " ";
@@ -78,6 +158,6 @@ void print(vector<int> &v) {
 }
 int main() {
 	vector<int> v = { 5,3,8,1,2,7 };
-	bubble_sort(v);
+	quick_sort(v,0,v.size()-1);
 	print(v);
 }

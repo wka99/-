@@ -27,20 +27,17 @@ void delete_element() {
 	heap[1] = heap[heapsize];
 	heapsize--;
 	int cur = 1;
-	int son1, son2, bson;
-	while (cur < heapsize) {
-		son1 = cur * 2;
-		son2 = cur * 2 + 1;
-		bson = son1;
-		if (son1 < heapsize) {
-			if (heap[son1] < heap[son2]) bson = son2;
+	int son = 2;
+	while (son <= heapsize) {
+		if (son < heapsize) {
+			if (heap[son] < heap[son+1]) son = son+1;
 		}
-		else if (son1 > heapsize) break;
-		if (heap[bson] > heap[cur]) {
+		if (heap[son] > heap[cur]) {
 			int tmp = heap[cur];
-			heap[cur] = heap[bson];
-			heap[bson] = tmp;
-			cur = bson;
+			heap[cur] = heap[son];
+			heap[son] = tmp;
+			cur = son;
+			son = cur * 2;
 		}
 		else break;
 	}

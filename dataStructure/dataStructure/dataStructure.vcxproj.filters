@@ -33,5 +33,11 @@
     <ClCompile Include="그래프.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="위상정렬.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="셸정렬.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

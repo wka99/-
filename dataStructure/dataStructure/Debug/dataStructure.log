@@ -1,2 +1,4 @@
-﻿  셸정렬.cpp
+﻿  그래프.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\datastructure\datastructure\그래프.cpp(13): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\datastructure\datastructure\그래프.cpp(27): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   dataStructure.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\dataStructure\Debug\dataStructure.exe

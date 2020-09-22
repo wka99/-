@@ -42,5 +42,11 @@
     <ClCompile Include="리스트.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="스트링.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="소스.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

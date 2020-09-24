@@ -63,5 +63,14 @@
     <ClCompile Include="자물쇠와열쇠.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="124나라의숫자.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="스킬트리.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="풍선터트리기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

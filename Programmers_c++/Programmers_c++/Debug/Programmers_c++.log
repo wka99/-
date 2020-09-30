@@ -1,5 +1,3 @@
-﻿  기능개발.cpp
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\기능개발.cpp(9): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\기능개발.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\기능개발.cpp(26): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+﻿  섬연결하기.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\programmers_c++\programmers_c++\섬연결하기.cpp(23): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Programmers_c++.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\Programmers_c++\Debug\Programmers_c++.exe

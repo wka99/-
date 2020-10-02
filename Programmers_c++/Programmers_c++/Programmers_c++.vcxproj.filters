@@ -114,5 +114,8 @@
     <ClCompile Include="가장먼노드.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="프렌즈4블록.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -38,5 +38,5 @@ int solution(int m, int n, vector<string> board) {
 }
 int main() {
 	vector<string> board = { "TTTANT", "RRFACC", "RRRFCC", "TRRRAA", "TTMMMF", "TMMTTJ" };
-	solution(6, 6, board);
+	cout<<solution(6, 6, board);
 }

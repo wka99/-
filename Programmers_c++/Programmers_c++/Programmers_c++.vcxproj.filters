@@ -123,5 +123,8 @@
     <ClCompile Include="단어변환.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="카카오프렌즈컬러링북.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

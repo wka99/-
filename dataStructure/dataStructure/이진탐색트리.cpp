@@ -65,6 +65,7 @@ void delete_node(treeNode *root, int data) {
 		}
 		succp->left = NULL;
 		t->data = succ->data;
+		delete(succ);
 	}
 }
 void preorder(treeNode *root) { //전위순회

@@ -126,5 +126,11 @@
     <ClCompile Include="카카오프렌즈컬러링북.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="3진법뒤집기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="삼각달팽이.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

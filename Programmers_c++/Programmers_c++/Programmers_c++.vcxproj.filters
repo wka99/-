@@ -135,5 +135,8 @@
     <ClCompile Include="쿼드압축후개수세기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="큰수만들기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

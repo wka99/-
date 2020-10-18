@@ -1,6 +1,13 @@
 #include <iostream>
 using namespace std;
 
+/*
+삽입정렬이 어느정도 정렬된 상태의 배열에 대해서
+효율이 높다는 것을 이용한 정렬 방식으로 
+부분 집합을 만들고 이를 정렬하는 과정을
+반복하고 이를 합쳐, 배열을 어느 정도 정렬된 상태로 만들어
+시간 복잡도를 줄이는 정렬 방식
+*/
 void insertion_sort(int list[], int start, int end, int gap) {
 	int val, i, j;
 	for (i = start + gap; i <= end; i += gap) {

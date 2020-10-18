@@ -7,6 +7,11 @@ using namespace std;
 vector<vector<int>>v(100, vector<int>(100, 0));
 int visited[100] = { 0, };
 
+/*
+깊이 우선 탐색
+한 노드에서 시작하여 다음 분기(branch)로 넘어가기 전에
+해당 분기(branch)를 완벽하게 탐색하는 방법
+*/
 void DFS(int e) {
 	cout << e << " ";
 	visited[e] = 1;
@@ -16,6 +21,11 @@ void DFS(int e) {
 		}
 	}
 }
+/*
+너비 우선 탐색
+시작 정점으로부터 가까운 정점들을 먼저 탐색하고
+먼 정점을 나중에 탐색하는 방법
+*/
 void BFS(int e) {
 	queue<int>q;
 	q.push(e);

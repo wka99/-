@@ -141,5 +141,8 @@
     <ClCompile Include="다음큰숫자.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="프린터.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

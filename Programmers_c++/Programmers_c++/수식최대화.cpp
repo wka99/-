@@ -33,16 +33,14 @@ long long solution(string expression) {
 				pri[i] = '+'; pri[j] = '-'; pri[k] = '*';
 				vector<long long> tmpn = num;
 				vector<char> tmpo = op;
-				long long cal;
 				for (int a = 0; a < 3; a++) {//우선 순위에 따라 계산하기
 					int idx = 0;
 					while (!tmpo.empty()) {//처음부터 탐색하면서 현재 우선순위와 일치하는 연산만 수행
 						if (tmpo[idx] == pri[a]) {//계산해주기
-							if (tmpo[idx] == '+') cal = tmpn[idx] + tmpn[idx + 1];
-							else if (tmpo[idx] == '-') cal = tmpn[idx] - tmpn[idx + 1];
-							else cal = tmpn[idx] * tmpn[idx + 1];
-							tmpn.erase(tmpn.begin() + idx, tmpn.begin() + idx + 2);
-							tmpn.insert(tmpn.begin() + idx, cal);
+							if (tmpo[idx] == '+') tmpn[idx] = tmpn[idx] + tmpn[idx + 1];
+							else if (tmpo[idx] == '-') tmpn[idx] = tmpn[idx] - tmpn[idx + 1];
+							else tmpn[idx] = tmpn[idx] * tmpn[idx + 1];
+							tmpn.erase(tmpn.begin() + idx + 1);
 							tmpo.erase(tmpo.begin() + idx, tmpo.begin() + idx + 1);
 						}
 						else idx++;
@@ -51,6 +49,7 @@ long long solution(string expression) {
 					if (tmpo.empty()) {
 						if (answer < abs(tmpn[0])) {
 							answer = abs(tmpn[0]);
+							cout << abs(tmpn[0]) << endl;
 						}
 					}
 				}

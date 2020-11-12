@@ -153,5 +153,8 @@
     <ClCompile Include="수식최대화.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="캐시.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

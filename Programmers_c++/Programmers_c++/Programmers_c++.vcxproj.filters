@@ -156,5 +156,20 @@
     <ClCompile Include="캐시.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="불량사용자.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="징검다리 건너기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="파일명정렬.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="점프와순간이동.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="보석쇼핑.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

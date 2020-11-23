@@ -1,59 +1,110 @@
-#include <iostream>
-#include <vector>
-#include <string>
+/*
+#include<vector>
+#include<iostream>
+#include<algorithm>
+#include<set>
 using namespace std;
 
-vector<vector<int>> turnkey(vector<vector<int>>key) { //키 돌리는 함수
-	vector<vector<int>> tmpk(key.size(), vector<int>(key.size()));
-	int a = key.size();
-	for (int i = 0; i < a; i++) {
-		for (int j = 0; j < a; j++) {
-			tmpk[i][j] = key[j][a - i - 1];
+vector<int> c;
+set<vector<int>> ways;
+int maxCnt = 0;
+
+void eatCookies(int prev, int cnt, vector<int> tmp){
+	if(prev==c.size()-1){
+		if(maxCnt<=cnt){
+			maxCnt = cnt;
+			ways.insert(tmp);
 		}
 	}
-	return tmpk;
-}
-bool check(vector<vector<int>> back, vector<vector<int>>key, int i, int j) {
-	int a = key.size();
-	int b = back.size();
-	for (int n = 0; n < a; n++) {
-		for (int m = 0; m < a; m++) {
-			back[n + i][m + j] += key[n][m];
+	for(int i=prev+1;i<c.size();i++){
+		if(c[prev]<c[i]){
+			tmp.push_back(c[i]);
+			eatCookies(i, cnt+1, tmp);
+			tmp.pop_back();
 		}
-	}
-	for (int n = a-1; n <= b - a; n++) {
-		for (int m = a-1; m <= b - a; m++) {
-			if (back[n][m] == 1) continue;
-			return false;
-		}
-	}
-	return true;
-}
-bool solution(vector<vector<int>> key, vector<vector<int>> lock) {
-	bool answer = false;
-	int size = lock.size() + (key.size() - 1) * 2;
-	//백그라운드 0으로 초기화
-	vector<vector<int>> back(size, vector<int>(size, 0));
-	//백그라운드 중심에 lock 복사해서 넣어놓기
-	for (int i = 0; i < lock.size(); i++) {
-		for (int j = 0; j < lock.size(); j++) {
-			back[i + key.size() - 1][j + key.size() - 1] = lock[i][j];
-		}
-	}
-	vector<vector<int>> tmpk = key;
-	for (int i = 0; i < 4; i++) {//4번돌리고
-		//이동시키면서 확인
-		for (int j = 0; j <= size - key.size(); j++) {
-			for (int k = 0; k <= size - key.size(); k++) {
-				if (check(back, tmpk, j, k)) return true;
+		else{
+			if(maxCnt<=cnt){
+				maxCnt = cnt;
+				ways.insert(tmp);
 			}
 		}
-		tmpk = turnkey(tmpk);
 	}
+}
+vector<int> solution(vector<int> cookies, int k)
+{
+	vector<int> answer;
+	c = cookies;
+	for(int i=0;i<cookies.size();i++){
+		vector<int> tmp;
+		tmp.push_back(cookies[i]);
+		eatCookies(i, 1, tmp);
+	}
+	set<vector<int>>::iterator it=ways.begin();
+	vector<vector<int>> maxways;
+	for(it;it!=ways.end();it++){
+		if((*it).size()==maxCnt)
+			maxways.push_back(*it);
+	}
+	sort(maxways.begin(), maxways.end());
+	answer = maxways[k-1];
 	return answer;
 }
-int main() {
-	vector<vector<int>> key = { {0,0,0},{1,0,0},{0,1,1} };
-	vector<vector<int>> lock = { {1,1,1},{1,1,0},{1,0,1} };
-	cout<<solution(key, lock);
+*/
+/*
+#include<vector>
+#include<iostream>
+#include<algorithm>
+#include<set>
+using namespace std;
+
+vector<int> c;
+vector<vector<int>> ways;
+int maxCnt = 0;
+
+void findWays(int prev, int cnt, vector<int> tmp){
+	if(cnt==maxCnt){
+		ways.push_back(tmp);
+		return;
+	}
+	for(int i=prev+1;i<c.size();i++){
+		if(c[prev]<c[i]){
+			tmp.push_back(c[i]);
+			findWays(i, cnt+1, tmp);
+			tmp.pop_back();
+		}
+	}
 }
+void eatCookies(int prev, int cnt){
+	if(prev==c.size()-1){
+		if(maxCnt<cnt){
+			maxCnt = cnt;
+		}
+	}
+	for(int i=prev+1;i<c.size();i++){
+		if(c[prev]<c[i]){
+			eatCookies(i, cnt+1);
+		}
+		else{
+			if(maxCnt<cnt){
+				maxCnt = cnt;
+			}
+		}
+	}
+}
+vector<int> solution(vector<int> cookies, int k)
+{
+	vector<int> answer;
+	c = cookies;
+	for(int i=0;i<cookies.size();i++){
+		eatCookies(i, 1);
+	}
+	for(int i=0;i<cookies.size();i++){
+		vector<int> tmp;
+		tmp.push_back(cookies[i]);
+		findWays(i, 1, tmp);
+	}
+	sort(ways.begin(), ways.end());
+	answer = ways[k-1];
+	return answer;
+}
+*/

@@ -186,7 +186,10 @@
     <ClCompile Include="등굣길.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="길찾기게임.cpp">
+    <ClCompile Include="이진변환반복하기.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="압축.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

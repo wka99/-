@@ -7,7 +7,6 @@ int solution(vector<vector<int>> board)
 {
 	int answer = 1234;
 	int mine, maxe = 0;
-	vector<vector<int>> cpy = board;
 	if (board.size() == 1 && board[0].size() == 1 && board[0][0] == 1) {
 		return 1;
 	}

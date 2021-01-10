@@ -1,2 +1,3 @@
-﻿  baekjoon_2448.cpp
+﻿  baekjoon_11053.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_11053.cpp(14): warning C4101: 'curr' :참조되지 않은 지역 변수입니다.
   des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

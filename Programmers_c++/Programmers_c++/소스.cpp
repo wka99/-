@@ -1,110 +1,49 @@
-/*
-#include<vector>
-#include<iostream>
-#include<algorithm>
-#include<set>
+#include <vector>
+#include <iostream>
 using namespace std;
 
-vector<int> c;
-set<vector<int>> ways;
-int maxCnt = 0;
+int visited[101][101];
+int dx[] = { -1,1,0,0 };
+int dy[] = { 0,0,-1,1 };
+int asize, xx, yy;
 
-void eatCookies(int prev, int cnt, vector<int> tmp){
-	if(prev==c.size()-1){
-		if(maxCnt<=cnt){
-			maxCnt = cnt;
-			ways.insert(tmp);
+void DFS(int x, int y, int type, vector<vector<int>> picture) {
+	visited[x][y] = 1;
+	int mx, my;
+	for (int i = 0; i < 4; i++) {
+		mx = x + dx[i];
+		my = y + dy[i];
+		if (mx < 0 || mx >= xx || my < 0 || my >= yy) continue;
+		if (picture[mx][my] == type && !visited[mx][my]) {
+			asize++;
+			DFS(mx, my, type, picture);
 		}
 	}
-	for(int i=prev+1;i<c.size();i++){
-		if(c[prev]<c[i]){
-			tmp.push_back(c[i]);
-			eatCookies(i, cnt+1, tmp);
-			tmp.pop_back();
-		}
-		else{
-			if(maxCnt<=cnt){
-				maxCnt = cnt;
-				ways.insert(tmp);
+}
+vector<int> solution(int m, int n, vector<vector<int>> picture) {
+	int number_of_area = 0;
+	int max_size_of_one_area = 0;
+	asize = 0;
+	xx = m, yy = n;
+	for (int i = 0; i < m; i++)
+		for (int j = 0; j < n; j++)
+			visited[i][j] = 0;
+	vector<int> answer(2);
+	for (int i = 0; i < m; i++) {
+		for (int j = 0; j < n; j++) {
+			if (picture[i][j] && !visited[i][j]) {
+				number_of_area++;
+				asize = 1;
+				DFS(i, j, picture[i][j], picture);
+				if (max_size_of_one_area < asize) max_size_of_one_area = asize;
 			}
 		}
 	}
-}
-vector<int> solution(vector<int> cookies, int k)
-{
-	vector<int> answer;
-	c = cookies;
-	for(int i=0;i<cookies.size();i++){
-		vector<int> tmp;
-		tmp.push_back(cookies[i]);
-		eatCookies(i, 1, tmp);
-	}
-	set<vector<int>>::iterator it=ways.begin();
-	vector<vector<int>> maxways;
-	for(it;it!=ways.end();it++){
-		if((*it).size()==maxCnt)
-			maxways.push_back(*it);
-	}
-	sort(maxways.begin(), maxways.end());
-	answer = maxways[k-1];
+	answer[0] = number_of_area;
+	answer[1] = max_size_of_one_area;
 	return answer;
 }
-*/
-/*
-#include<vector>
-#include<iostream>
-#include<algorithm>
-#include<set>
-using namespace std;
-
-vector<int> c;
-vector<vector<int>> ways;
-int maxCnt = 0;
-
-void findWays(int prev, int cnt, vector<int> tmp){
-	if(cnt==maxCnt){
-		ways.push_back(tmp);
-		return;
-	}
-	for(int i=prev+1;i<c.size();i++){
-		if(c[prev]<c[i]){
-			tmp.push_back(c[i]);
-			findWays(i, cnt+1, tmp);
-			tmp.pop_back();
-		}
-	}
+int main() {
+	vector<int> a = solution(6, 4, { {1,1,1,0},{1,2,2,0},{1,0,0,1},{0,0,0,1},{0,0,0,3},{0,0,0,3} });
+	cout << a[0] << " " << a[1] << endl;
 }
-void eatCookies(int prev, int cnt){
-	if(prev==c.size()-1){
-		if(maxCnt<cnt){
-			maxCnt = cnt;
-		}
-	}
-	for(int i=prev+1;i<c.size();i++){
-		if(c[prev]<c[i]){
-			eatCookies(i, cnt+1);
-		}
-		else{
-			if(maxCnt<cnt){
-				maxCnt = cnt;
-			}
-		}
-	}
-}
-vector<int> solution(vector<int> cookies, int k)
-{
-	vector<int> answer;
-	c = cookies;
-	for(int i=0;i<cookies.size();i++){
-		eatCookies(i, 1);
-	}
-	for(int i=0;i<cookies.size();i++){
-		vector<int> tmp;
-		tmp.push_back(cookies[i]);
-		findWays(i, 1, tmp);
-	}
-	sort(ways.begin(), ways.end());
-	answer = ways[k-1];
-	return answer;
-}
-*/

@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 
+//dp를 이용한 lis 알고리즘 구현
 int main(){
 	int N, a, b, maxV = 0;
 	vector<pair<int, int>> v;

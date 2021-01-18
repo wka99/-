@@ -1,65 +1,110 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
+#include <queue>
 using namespace std;
 
-/*
-	치킨 거리: 집과 가까운 치킨집 사이의 거리
-	도시의 치킨 거리: 모든 집의 치킨 거리의 합
-	도시의 치킨 거리가 가장 작게 되도록 폐업시킬 치킨집 고르기
-*/
-
-int N, M, rcnt;
+int R, C, T;
 int map[51][51];
-vector<pair<int, int>> chicken;
-vector<pair<int, int>> house;
-int closed[14] = { 0, };
-int result = 10001;
+vector<int> ac; //공기청정기 위치
+queue <pair<int, int>> dust; //먼지 위치
+int dx[4] = { -1,1,0,0 };
+int dy[4] = { 0,0,-1,1 };
+int clock[4] = { 3,1,2,0 }; //시계
+int anticlock[4] = { 3,0,2,1 }; //반시계
 
-int dist() {
-	int minD, dist, chiDist = 0;
-	for (int i = 0; i < house.size(); i++) {
-		minD = 101;
-		for (int j = 0; j < chicken.size(); j++) {
-			if (!closed[j]) {
-				dist = abs(house[i].first - chicken[j].first) + abs(house[i].second - chicken[j].second);
-				if (minD > dist)minD = dist;
-			}
+void spread() { //미세먼지 확산
+	int tmp[51][51];
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			if (map[i][j] > 0)
+				dust.push({ i,j });
+			tmp[i][j] = map[i][j];
 		}
-		chiDist += minD;
 	}
-	return chiDist;
+	int x, y, mx, my, sdust;
+	while (!dust.empty()) {
+		x = dust.front().first;
+		y = dust.front().second;
+		sdust = map[x][y] / 5;
+		dust.pop();
+		for (int i = 0; i < 4; i++) {
+			mx = x + dx[i];
+			my = y + dy[i];
+			if (mx < 0 || mx >= R || my < 0 || my >= C) continue;
+			if (map[mx][my] == -1) continue;
+			tmp[mx][my] += sdust;
+			tmp[x][y] -= sdust;
+		}
+	}
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			map[i][j] = tmp[i][j];
+		}
+	}
 }
-void dfs(int idx, int cnt) {
-	if (cnt == rcnt) {
-		int d = dist();
-		if (result > d) result = d;
-		return;
+void ac_on() { //공기청정기 작동
+	int tmp[51][51];
+	int x, y, mx, my;
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			tmp[i][j] = map[i][j];
+		}
 	}
-	if (idx == chicken.size()) return;
-	closed[idx] = 1;
-	dfs(idx + 1, cnt + 1);
-
-	closed[idx] = 0;
-	dfs(idx + 1, cnt);
+	//반시계
+	x = ac[0];
+	y = 1;
+	tmp[x][y] = 0;
+	for (int i = 0; i < 4; i++) {
+		while (1) {
+			mx = x + dx[anticlock[i]];
+			my = y + dy[anticlock[i]];
+			if (mx < 0 || mx >= R || my < 0 || my >= C) break;
+			if (mx == ac[0] && my == 0) break;
+			tmp[mx][my] = map[x][y];
+			x = mx;
+			y = my;
+		}
+	}
+	//시계
+	x = ac[1];
+	y = 1;
+	tmp[x][y] = 0;
+	for (int i = 0; i < 4; i++) {
+		while (1) {
+			mx = x + dx[clock[i]];
+			my = y + dy[clock[i]];
+			if (mx < 0 || mx >= R || my < 0 || my >= C) break;
+			if (mx == ac[1] && my == 0) break;
+			tmp[mx][my] = map[x][y];
+			x = mx;
+			y = my;
+		}
+	}
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			map[i][j] = tmp[i][j];
+		}
+	}
 }
 int main() {
-	cin >> N >> M;
-	for (int i = 0; i < N; i++) {
-		for (int j = 0; j < N; j++) {
+	cin >> R >> C >> T;
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
 			cin >> map[i][j];
-			if (map[i][j] == 2)
-				chicken.push_back({ i,j });
-			else if (map[i][j] == 1)
-				house.push_back({ i,j });
+			if (map[i][j] == -1)
+				ac.push_back(i);
 		}
 	}
-	rcnt = chicken.size() - M;
-	if (M == chicken.size()) {
-		cout << dist() << endl;
+	for (int i = 0; i < T; i++) {
+		spread();
+		ac_on();
 	}
-	else {
-		dfs(0, 0);
-		cout << result << endl;
+	int result = 0;
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			if (map[i][j] > 0)
+				result += map[i][j];
+		}
 	}
+	cout << result << endl;
 }

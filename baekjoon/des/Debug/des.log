@@ -1,2 +1,9 @@
-﻿  baekjoon_1463.cpp
+﻿  baekjoon_1074.cpp
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(24): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(28): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(32): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(36): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(41): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(42): warning C4101: 'my' :참조되지 않은 지역 변수입니다.
+c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(42): warning C4101: 'mx' :참조되지 않은 지역 변수입니다.
   des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

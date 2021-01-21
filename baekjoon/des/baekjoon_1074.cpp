@@ -18,19 +18,19 @@ void divide(int x, int y, int s) {
 			}
 		}
 	}
-	if (x + s / 2 - 1 <= r && y + s / 2 - 1 <= c)
+	if (x <= r && y <= c && x + s / 2 - 1 >= r && y + s / 2 - 1 >= c)
 		divide(x, y, s / 2);
 	else
 		n += pow(s / 2, 2);
-	if (x + s / 2 - 1 <= r && y + s - 1 <= c)
+	if (x <= r && y + s / 2 <= c && x + s / 2 - 1 >= r && y + s - 1 >= c)
 		divide(x, y + s / 2, s / 2);
 	else
 		n += pow(s / 2, 2);
-	if (x + s - 1 <= r && y + s / 2 - 1 <= c)
+	if (x + s / 2 <= r && y <= c && x + s - 1 >= r && y + s / 2 - 1 >= c)
 		divide(x + s / 2, y, s / 2);
 	else
 		n += pow(s / 2, 2);
-	if (x + s - 1 <= r && y + s - 1 <= c)
+	if (x + s / 2 <= r && y + s / 2 <= c && x + s - 1 >= r && y + s - 1 >= c)
 		divide(x + s / 2, y + s / 2, s / 2);
 	else
 		n += pow(s / 2, 2);

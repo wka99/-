@@ -1,31 +1,32 @@
 #include <iostream>
-#include <string>
-#include <cmath>
 #include <vector>
 using namespace std;
 
-int answer = 0;
-int N, M;
-vector<int> num;
-void check(int idx, int sum) {
-	sum += num[idx];
-	if (sum == M) {
-		answer++;
-		return;
-	}
-	if (idx + 1 < N)
-		check(idx + 1, sum);
-	else return;
-}
+//투 포인터
 int main() {
-	int tmp;
+	int N, M, K;
+	int A[10000];
 	cin >> N >> M;
 	for (int i = 0; i < N; i++) {
-		cin >> tmp;
-		num.push_back(tmp);
+		cin >> A[i];
 	}
-	for (int i = 0; i < N; i++) { //시작 인덱스 결정
-		check(i,0);
+	int left = 0, right = 0, cnt = 0;
+	long long s = 0;
+	while (left <= right) {
+		if (s == M) {
+			s -= A[left];
+			left++;
+			cnt++;
+		}
+		else if (s < M) {
+			if (right >= N) break;
+			s += A[right];
+			right++;
+		}
+		else {
+			s -= A[left];
+			left++;
+		}
 	}
-	cout << answer << endl;
+	cout << cnt << endl;
 }

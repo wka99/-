@@ -17,6 +17,25 @@ int Find(int x) {
 	if (par[x] == x) return par[x];
 	int xp = Find(par[x]);
 	d[x] += d[par[x]];
+	/*
+		해당 문장이 필요한 이유, 반례
+		7 9
+		! 1 2 100
+		! 2 3 100
+		! 4 3 150
+		! 6 7 50
+		! 5 6 50
+		! 5 4 10
+		? 5 3
+		? 5 7
+		? 1 5
+		0 0
+
+		ans
+		160
+		100
+		40
+	*/
 	return par[x] = xp;
 }
 void Union(int x, int y, int w) { //y가 x보다 w 무거움

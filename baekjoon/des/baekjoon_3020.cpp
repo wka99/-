@@ -1,57 +1,44 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-#define SZ_TR	2000000
+#define OFFSET 524288
+#define SZ_TR 1048576
 
-int trees[SZ_TR] = { 0, };
-int offset;
+int tree[SZ_TR] = { 0, };
 int N, H;
 
-//구간 업데이트, 특정값 조회
-
-void init() {
-	for (offset = 1; offset < H; offset *= 2);
-}
-void update(int from, int to) { //해당 자식을 완전히 포함하는 부모만을 update
-	from += offset;
-	to += offset;
-	while (from <= to) {
-		if (from % 2 == 1) {
-			trees[from]++;
-			from++;
-		}
-		if (to % 2 == 0) {
-			trees[to]++;
-			to--;
-		}
-		from /= 2; to /= 2;
-	}
-}
-int query(int idx) { //쿼리시 자기자신부터 부모를 타고 올라가서 전부 더한것이 파괴해야 하는 장애물 개수
+int query(int idx) {
 	int res = 0;
-	idx += offset;
-	res += trees[idx];
-	idx /= 2;
+	idx += OFFSET;
 	while (idx > 0) {
-		res += trees[idx];
+		res += tree[idx];
 		idx /= 2;
 	}
 	return res;
 }
+void update(int from, int to) { //구간 업데이트
+	from += OFFSET;
+	to += OFFSET;
+	while (from <= to) {
+		if (from % 2 == 1) tree[from++]++;
+		if (to % 2 == 0) tree[to--]++;
+		from /= 2; to /= 2;
+	}
+}
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int t;
 	cin >> N >> H;
-	init();
-	int tmp;
 	for (int i = 0; i < N; i++) {
-		cin >> tmp;
-		if (i % 2 == 1) { //종유석
-			update(H - tmp, H - 1);
+		cin >> t;
+		if (i % 2 == 0) { //석순
+			update(0, t - 1);
 		}
-		else { //석순
-			update(0, tmp - 1);
+		else { //종유석
+			update(H - t, H - 1);
 		}
 	}
-	int breaks, cnt = 0;
-	int minV = 200001;
+	int minV = 200001, breaks, cnt = 1;
 	for (int i = 0; i < H; i++) {
 		breaks = query(i);
 		if (minV > breaks) {

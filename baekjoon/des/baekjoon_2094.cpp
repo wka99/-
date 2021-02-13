@@ -2,88 +2,94 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-#define MAX_N 200000
-/*
-	특정 구간의 최대값이 필요
-	x와 y 사이 구간의 강수량의 최대값이
-	x의 강수량보다 적은 경우 참이 된다.
-	=> indexed tree(max)를 이용
-*/
-int N;
-vector <int> years, rains;
-int trees[MAX_N] = { 0, }; //비는 부분은 영향을 주지 못하도록 0으로 초기화
-int offset;
+#define OFFSET 65536
+#define SZ_TR 131072
 
-void init() {
-	for (offset = 1; offset < N; offset *= 2);
-	for (int i = 0; i < N; i++) {
-		trees[offset + i] = rains[i];
-	}
-	for (int i = offset - 1; i > 0; i--) {
-		trees[i] = max(trees[i * 2], trees[i * 2 + 1]);
-	}
-}
-int query(int from, int to) {
+int tree[SZ_TR] = { 0, };
+vector<int> years, rains;
+
+int find(int from, int to) {
 	int res = 0;
-	from += offset; to += offset;
+	from += OFFSET;
+	to += OFFSET;
 	while (from <= to) {
 		if (from % 2 == 1) {
-			res = max(res, trees[from]);
+			res = max(res, tree[from]);
 			from++;
 		}
 		if (to % 2 == 0) {
-			res = max(res, trees[to]);
+			res = max(res, tree[to]);
 			to--;
 		}
 		from /= 2; to /= 2;
 	}
 	return res;
 }
+void update(int idx, int data) {
+	idx += OFFSET;
+	tree[idx] = data;
+	idx /= 2;
+	while (idx > 0) {
+		tree[idx] = max(tree[idx * 2], tree[idx * 2 + 1]);
+		idx /= 2;
+	}
+}
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int N, M, x, y, r;
 	cin >> N;
-	int x, y, r, M;
-	for (int i = 0; i < N; i++) {
+	for (int i = 0; i < N; i++) { 
+		//연도는 오름차순으로 주어진다
+		//벡터에 순서대로 저장하고 이분탐색으로 찾아내자
 		cin >> y >> r;
 		years.push_back(y);
 		rains.push_back(r);
+		update(i, r);
 	}
-	init();
 	cin >> M;
-	int low, high, mid;
-	int yidx, xidx;
+	int yidx, xidx, low, high, mid;
 	for (int i = 0; i < M; i++) {
+		//y년도와 x년도 사이에 모든 년도가 존재하는지
+		//확인하기 위해서는 인덱스트리의 인덱스 차와 x, y의 차가 같은지 확인하면됨
 		cin >> y >> x;
+		//1. y연도
 		low = 0; high = N - 1;
 		while (low <= high) {
 			mid = (low + high) / 2;
-			if (years[mid] >= y) high = mid - 1;
+			if (years[mid] >= y) {
+				yidx = mid;
+				high = mid - 1;
+			}
 			else low = mid + 1;
 		}
-		yidx = high + 1;
+		//2. x연도
 		low = 0; high = N - 1;
 		while (low <= high) {
 			mid = (low + high) / 2;
-			if (years[mid] <= x) low = mid + 1;
+			if (years[mid] <= x) {
+				xidx = mid;
+				low = mid + 1;
+			}
 			else high = mid - 1;
 		}
-		xidx = low - 1;
-		if (y != years[yidx] && x != years[xidx]) {
-			cout << "maybe" << endl;
+		//x연도와 y연도에 대한 정보가 모두 없음
+		if (years[yidx] != y && years[xidx] != x) cout << "maybe\n";
+		else if (years[yidx] == y && years[xidx] != x) { //y연도 데이터만 존재
+			if (find(yidx + 1 , xidx) < rains[yidx]) cout << "maybe\n";
+			else cout << "false\n";
 		}
-		else if (y != years[yidx] && x == years[xidx]) {
-			if (query(yidx, xidx - 1) < rains[xidx]) cout << "maybe" << endl;
-			else cout << "false" << endl;
+		else if (years[yidx] != y && years[xidx] == x) { //x연도 데이터만 존재
+			if (find(yidx, xidx - 1) < rains[xidx]) cout << "maybe\n";
+			else cout << "false\n";
 		}
-		else if (y == years[yidx] && x != years[xidx]) {
-			if (query(yidx + 1, xidx) < rains[yidx]) cout << "maybe" << endl;
-			else cout << "false" << endl;
-		}
-		else {
-			if (rains[yidx] >= rains[xidx] && query(yidx+1, xidx-1)<rains[xidx]) {
-				if (x - y == xidx - yidx) cout << "true" << endl;
-				else cout << "maybe" << endl;
+		else { //x연도와 y연도 정보 모두 존재
+			if (rains[yidx] >= rains[xidx] && find(yidx + 1, xidx - 1) < rains[xidx]) {
+				//x연도와 y연도 사이값 모두 존재
+				if (xidx - yidx == x - y) cout << "true\n";
+				else cout << "maybe\n";
 			}
-			else cout << "false" << endl;
+			else cout << "false\n";
 		}
 	}
 }

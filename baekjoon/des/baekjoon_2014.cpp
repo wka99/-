@@ -6,13 +6,13 @@ using namespace std;
 //소수들의 곱 중 N번째 수를 구해보자
 //priority queue를 이용해야함
 
-long long num[MAX_N];
+int num[MAX_N];
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	int K, N;
 	priority_queue<long long, vector<long long>, greater<long long>> pq;
-	vector<int> answer;
+	vector<long long> answer;
 	cin >> K >> N;
 	for (int i = 0; i < K; i++) {
 		cin >> num[i];

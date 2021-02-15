@@ -450,5 +450,14 @@
     <ClCompile Include="baekjoon_1932.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="baekjoon_11049.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_14003.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_10211.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

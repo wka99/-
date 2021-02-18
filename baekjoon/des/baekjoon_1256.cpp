@@ -1,18 +1,17 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#define MAX_N 101
-#define MAX 1000000000
+#define MAX 101
+#define MAX_K 1000000000
 
-string ans = "";
-int dp[MAX_N][MAX_N];
-int tn, tm;
 int N, M, K;
+int dp[MAX][MAX];
+string ans = "";
 
-// dp[x][y] a가 x개 b가 y개 있을 때 만들 수 있는 수열의 개수
-// => x+yCy와 같다
+// dp[n][m] => n+m C m = n+m-1 C m-1 + n+m-1 C m
+// dp[n][m] = dp[n][m-1] + dp[n-1][m]
 
-void getWord(int a, int z, int left) {
+void getWord(int a, int z, int k) {
 	if (a == 0) {
 		for (int i = 0; i < z; i++) ans += 'z';
 		return;
@@ -22,31 +21,29 @@ void getWord(int a, int z, int left) {
 		return;
 	}
 	int skip = dp[a - 1][z];
-	if (left < skip) {
-		ans += 'a';
-		getWord(a - 1, z, left);
+	if (skip < k) {
+		ans += 'z';
+		getWord(a, z - 1, k - skip);
 	}
 	else {
-		ans += 'z';
-		getWord(a, z - 1, left - skip);
+		ans += 'a';
+		getWord(a - 1, z, k);
 	}
 }
 int main() {
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
-	//N개의 a와 M개의 z로 이루어진 문자열
-	//사전순 K번째 문자열 출력
 	cin >> N >> M >> K;
-	for (int i = 0; i <= N; i++) dp[i][0] = 1;
-	for (int i = 0; i <= M; i++) dp[0][i] = 1;
+	for (int i = 1; i <= M; i++) dp[0][i] = 1;
+	for (int i = 1; i <= N; i++) dp[i][0] = 1;
 	for (int i = 1; i <= N; i++) {
 		for (int j = 1; j <= M; j++) {
-			dp[i][j] = min(dp[i - 1][j] + dp[i][j - 1], MAX);
+			dp[i][j] = min(dp[i][j - 1] + dp[i - 1][j], MAX_K);
 		}
 	}
 	if (dp[N][M] < K) cout << -1 << endl;
 	else {
-		getWord(N, M, K - 1);
+		getWord(N, M, K);
 		cout << ans << endl;
 	}
 }

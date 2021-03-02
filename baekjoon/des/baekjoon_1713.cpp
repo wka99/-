@@ -35,3 +35,55 @@ int main() {
 		cout << it->first << " ";
 	}cout << endl;
 }
+/*
+#include <iostream>
+#include <map>
+#include <algorithm>
+#include <queue>
+using namespace std;
+
+int when[101]; //각 학생 추천받은 시기
+int cnt[101]; //각 학생 득표수
+int curr = 0;
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	int N, M, s;
+	cin >> N >> M;
+	for (int i = 1; i <= M; i++) {
+		cin >> s;
+		if (cnt[s] == 0) { //사진첩에 없음
+			if (curr < N) {
+				when[s] = i;
+				cnt[s] += 1;
+				curr++;
+			}
+			else {
+				int minC = 1001;
+				int pops;
+				for (int i = 1; i < 101; i++) {
+					if (cnt[i] != 0 && minC > cnt[i]) {
+						pops = i;
+						minC = cnt[i];
+					}
+					else if (cnt[i] != 0 && minC == cnt[i]) {
+						if (when[pops] > when[i]) {
+							pops = i;
+						}
+					}
+				}
+				cnt[pops] = 0;
+				when[pops] = 0;
+				cnt[s] += 1;
+				when[s] = i;
+			}
+		}
+		else { //사진첩에 있음
+			cnt[s] += 1;
+		}
+	}
+	for (int i = 1; i < 101; i++) {
+		if (cnt[i] != 0)cout << i << " ";
+	}cout << endl;
+}
+*/

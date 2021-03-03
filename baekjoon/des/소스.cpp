@@ -1,42 +1,86 @@
 #include <iostream>
-#include <algorithm>
-#include <string>
+#include <queue>
+#include <vector>
 using namespace std;
+#define MAX 51
+#define MAX_T 2501
 
-int L, C;
-char alpha[16];
-int visited[16];
-//최소 1개의 모음, 최소 2개의 자음으로 구성
-//암호는 알파벳이 증가하는 순서
+int R, C;
+int map[MAX][MAX];
+int visited[MAX][MAX];
+int timev[MAX_T];
+int sx, sy;//고슴도치 위치
+int dx[4] = { -1,1,0,0 };
+int dy[4] = { 0,0,-1,1 };
+vector<pair<int, int>> water;
+int ans = MAX_T;
 
-void makeCipher(int idx, int cons, int vow, string s) {
-	if (idx == L) {
-		if (cons > 1 && vow > 0)
-			cout << s << "\n";
-		return;
+void spread() {
+	int s = water.size();
+	int x, y, mx, my;
+	for (int i = 0; i < s; i++) {
+		x = water[i].first;
+		y = water[i].second;
+		for (int j = 0; j < 4; j++) {
+			mx = x + dx[j];
+			my = y + dy[j];
+			if (mx < 0 || my < 0 || mx >= R || my >= C) continue;
+			if (map[mx][my]) continue;
+			map[mx][my] = 1;
+			water.push_back({ mx,my });
+		}
 	}
-	for (int i = 0; i < C; i++) {
-		if (!visited[i] && (idx == 0 || s[idx-1] < alpha[i])) {
-			if (alpha[i] == 'a' || alpha[i] == 'e' || alpha[i] == 'i' || alpha[i] == 'o' || alpha[i] == 'u') {
-				visited[i] = 1;
-				makeCipher(idx + 1, cons, vow + 1, s + alpha[i]);
-				visited[i] = 0;
-			}
-			else {
-				visited[i] = 1;
-				makeCipher(idx + 1, cons + 1, vow, s + alpha[i]);
-				visited[i] = 0;
-			}
+}
+void travel() {
+	int x, y, mx, my;
+	queue<pair<int, int>> q;
+	q.push({ sx, sy });
+	visited[sx][sy] = 1;
+	while (!q.empty()) {
+		x = q.front().first;
+		y = q.front().second;
+		q.pop();
+		if (map[x][y] == 3) {
+			ans = visited[x][y] - 1;
+			return;
+		}
+		if (!timev[visited[x][y]]) {
+			timev[visited[x][y]] = 1;
+			spread();
+		}
+		for (int i = 0; i < 4; i++) {
+			mx = x + dx[i];
+			my = y + dy[i];
+			if (mx < 0 || my < 0 || mx >= R || my >= C)continue;
+			if (map[mx][my] == 1 || map[mx][my] == 2) continue;
+			if (visited[mx][my]) continue;
+			q.push({ mx, my });
+			visited[mx][my] = visited[x][y] + 1;
 		}
 	}
 }
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-	cin >> L >> C;
-	for (int i = 0; i < C; i++) {
-		cin >> alpha[i];
+	char tmp;
+	cin >> R >> C;
+	for (int i = 0; i < R; i++) {
+		for (int j = 0; j < C; j++) {
+			cin >> tmp;
+			if (tmp == 'D') {//비버집
+				map[i][j] = 3;
+			}
+			else if (tmp == 'S') {
+				sx = i; sy = j;
+			}
+			else if (tmp == 'X') {//돌멩이
+				map[i][j] = 2;
+			}
+			else if (tmp == '*') {//물
+				map[i][j] = 1;
+				water.push_back({ i,j });
+			}
+		}
 	}
-	sort(alpha, alpha + C);
-	makeCipher(0, 0, 0, "");
+	travel();
+	if (ans == MAX_T) cout << "KAKTUS\n";
+	else cout << ans << "\n";
 }

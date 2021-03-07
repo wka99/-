@@ -1,51 +1,52 @@
 #include <iostream>
 #include <string>
-#include <map>
 using namespace std;
 #define MAX_N 51
+#define anum 'a'
 
 int N, K;
 string words[MAX_N];
-map <char, int> should;
+int alpha[26];
 //a n t i c 은 반드시 알아야함
 int maxV = 0;
 
-void learn(int cnt) {
+void learn(int idx, int cnt) {
 	if (cnt == K) {
-		int ans = 0, i, j;
-		for (i = 0; i < N; i++) {
-			for (j = 0; j < words[i].size(); j++) {
-				if (should[words[i][j]] == 0) break;
+		int ans = 0, curr, len;
+		for (int i = 0; i < N; i++) {
+			curr = 0; len = words[i].size();
+			for (int j = 0; j < len; j++) {
+				if (alpha[words[i][j] - anum]) curr++;
 			}
-			if (j == words[i].size()) ans++;
+			if (curr == len) ans++;
 		}
 		maxV = max(maxV, ans);
 		return;
 	}
-	char f = 'a', next;
-	for (int i = 0; i < 26; i++) {
-		next = f + i;
-		if (should.find(next) == should.end()) continue;
-		if (!should[next]) {
-			should[next] = 1;
-			learn(cnt + 1);
-			should[next] = 0;
+	for (int i = idx; i < 26; i++) {
+		if (!alpha[i]) {
+			alpha[i] = 1;
+			learn(i + 1, cnt + 1);
+			alpha[i] = 0;
 		}
 	}
 }
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> K;
 	for (int i = 0; i < N; i++) {
 		cin >> words[i];
-		for (int j = 0; j < words[i].size(); j++) {
-			should[words[i][j]] = 0;
-		}
 	}
-	should['a'] = 1; should['n'] = 1;
-	should['t'] = 1; should['i'] = 1; should['c'] = 1;
 	if (K < 5) cout << 0 << endl;
 	else {
-		learn(5);
+		alpha['a' - anum] = 1;
+		alpha['n' - anum] = 1;
+		alpha['t' - anum] = 1;
+		alpha['i' - anum] = 1;
+		alpha['c' - anum] = 1;
+		K -= 5;
+		learn(0,0);
 		cout << maxV << endl;
 	}
 }

@@ -1,46 +1,56 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
+#define MAX 1001
 
-int puzzle[9][9];
-int col[9][10], row[9][10], square[9][10];
-vector<pair<int, int>> blank;
-
-void play(int idx) {
-	if (idx == blank.size()) { //모든 칸이 채워짐
-		for (int i = 0; i < 9; i++) {
-			for (int j = 0; j < 9; j++) {
-				cout << puzzle[i][j] << " ";
-			}cout << endl;
-		}
-		exit(0);
-	}
-	int x = blank[idx].first;
-	int y = blank[idx].second;
-	for (int i = 1; i < 10; i++) {
-		if (square[(x / 3) * 3 + y / 3][i]) continue;
-		if (col[y][i]) continue;
-		if (row[x][i]) continue;
-		col[y][i] = 1;
-		row[x][i] = 1;
-		square[(x / 3) * 3 + y / 3][i] = 1;
-		puzzle[x][y] = i;
-		play(idx + 1);
-		col[y][i] = 0;
-		row[x][i] = 0;
-		square[(x / 3) * 3 + y / 3][i] = 0;
-		puzzle[x][y] = 0;
-	}
-}
 int main() {
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			cin >> puzzle[i][j];
-			if (!puzzle[i][j]) blank.push_back({ i,j });
-			row[i][puzzle[i][j]]++;
-			col[j][puzzle[i][j]]++;
-			square[(i / 3) * 3 + j / 3][puzzle[i][j]]++;
+	long long ans = 0;
+	int T, N, M;
+	int A[MAX], B[MAX];
+	vector<int> sumA, sumB;
+	cin >> T >> N;
+	for (int i = 0; i < N; i++) cin >> A[i];
+	cin >> M;
+	for (int i = 0; i < M; i++) cin >> B[i];
+	int s;
+	for (int i = 0; i < N; i++) {
+		s = 0;
+		for (int j = i; j < N; j++) {
+			s += A[j];
+			sumA.push_back(s);
 		}
 	}
-	play(0);
+	for (int i = 0; i < M; i++) {
+		s = 0;
+		for (int j = i; j < M; j++) {
+			s += B[j];
+			sumB.push_back(s);
+		}
+	}
+	sort(sumA.begin(), sumA.end());
+	sort(sumB.begin(), sumB.end());
+	//정렬시 크기가 같은 값은 인접하게 위치하게 된다.
+	int l = 0, r = sumB.size() - 1, cur;
+	while (l < sumA.size() && r >= 0) {
+		cur = sumA[l] + sumB[r];
+		if (cur == T) {
+			//T와 같은 경우, 
+			//현재 subA[i]와 같은 원소의 개수 * 현재 subB[j]와 같은 원소의 개수
+			//=> 가능한 조합의 개수
+			long long c1 = 0, c2 = 0;
+			int tmp = sumA[l];
+			while (l < sumA.size() && tmp == sumA[l]) {
+				c1++; l++;
+			}
+			tmp = sumB[r];
+			while (r >= 0 && tmp == sumB[r]) {
+				c2++; r--;
+			}
+			ans += c1 * c2;
+		}
+		else if (cur < T) l++;
+		else r--;
+	}
+	cout << ans << endl;
 }

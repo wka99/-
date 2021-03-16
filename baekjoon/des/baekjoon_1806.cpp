@@ -1,35 +1,29 @@
 #include <iostream>
-#include <vector>
 using namespace std;
-#define MAX_N 100001
+#define MAX 100001
 
+int nums[MAX];
 int main() {
-	int N, S, tmp;
+	int N, S;
 	cin >> N >> S;
-	vector<int> numbers;
 	for (int i = 0; i < N; i++) {
-		cin >> tmp;
-		numbers.push_back(tmp);
+		cin >> nums[i];
 	}
 	int left = 0, right = 0;
-	long long sum = 0;
-	int result = MAX_N;
+	int curr = 0, len = MAX;
 	while (left <= right) {
-		if (sum < S) {
-			if (right >= N) break;
-			sum += numbers[right];
+		if (curr < S && right < N) {
+			curr += nums[right];
 			right++;
 		}
-		else if(sum >= S){
-			if (result > right - left) {
-				result = right - left;
+		else {
+			if (curr >= S) {
+				len = min(len, right - left);
 			}
-			sum -= numbers[left];
+			curr -= nums[left];
 			left++;
 		}
 	}
-	if (result == MAX_N)
-		cout << 0 << endl;
-	else
-		cout << result << endl;
+	if (len == MAX) cout << 0 << endl;
+	else cout << len << endl;
 }

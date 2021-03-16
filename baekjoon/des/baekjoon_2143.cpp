@@ -35,6 +35,9 @@ int main() {
 	while (l < sumA.size() && r >= 0) {
 		cur = sumA[l] + sumB[r];
 		if (cur == T) {
+			//T와 같은 경우, 
+			//현재 subA[i]와 같은 원소의 개수 * 현재 subB[j]와 같은 원소의 개수
+			//=> 가능한 조합의 개수
 			long long c1 = 0, c2 = 0;
 			int tmp = sumA[l];
 			while (l < sumA.size() && tmp == sumA[l]) {

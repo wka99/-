@@ -1,2 +1,4 @@
-﻿  baekjoon_11404.cpp
+﻿  baekjoon_11657.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_11657.cpp(24,21): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_11657.cpp(31,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

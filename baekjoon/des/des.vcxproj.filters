@@ -597,7 +597,16 @@
     <ClCompile Include="baekjoon_3190.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="baekjoon_20055.cpp">
+    <ClCompile Include="CJ1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CJ2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CJ3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="baekjoon_13460.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

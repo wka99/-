@@ -618,5 +618,14 @@
     <ClCompile Include="baekjoon_17142.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="CJ_R1_1.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CJ_R1_2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CJ_R1_3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

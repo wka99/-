@@ -1,4 +1,2 @@
-﻿  CJ_R1_1.cpp
-C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_1.cpp(27,22): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_1.cpp(33,15): warning C4101: 'append' :참조되지 않은 지역 변수입니다.
+﻿  소스.cpp
   des.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\Debug\des.exe

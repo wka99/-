@@ -1,8 +1,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-#define k "koosaga"
-#define c "cubelover"
 #define MAX_N 101
 
 int N;
@@ -16,15 +14,19 @@ int main() {
 		total += rock[i];
 	}
 	if (N == 1) {
-		if (N % 2 == 0) cout << c << endl;
-		else cout << k << endl;
+		if (total % 2 == 1) cout << "cubelover" << endl;
+		else cout << "koosaga" << endl;
 	}
 	else {
-		int curr = rock[0];
-		for (int i = 1; i < N; i++) {
+		int curr = 0;
+		for (int i = 0; i < N; i++) {
+			if (rock[i] == 1) {
+				cout << "koosaga" << endl;
+				return 0;
+			}
 			curr ^= rock[i];
 		}
-		if (!curr)cout << k << endl;
-		else cout << c << endl;
+		if (curr)cout << "koosaga" << endl;
+		else cout << "cubelover" << endl;
 	}
 }

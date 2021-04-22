@@ -83,3 +83,70 @@ int main() {
 	}
 	cout << maxSafeZone << endl;
 }
+/*
+#include <iostream>
+#include <queue>
+#include <vector>
+using namespace std;
+#define MAX 9
+
+int N, M;
+vector<vector<int>> board(MAX, vector<int>(MAX, 0));
+vector<pair<int, int>> vacant;
+queue<pair<int, int>> virus;
+int dx[4] = { -1,1,0,0 };
+int dy[4] = { 0,0,-1,1 };
+int ans = 0;
+
+void spread(vector<vector<int>> board) {
+	int x, y, mx, my;
+	queue<pair<int, int>> t_virus = virus;
+	while (!t_virus.empty()) {
+		int x = t_virus.front().first;
+		int y = t_virus.front().second;
+		t_virus.pop();
+		for (int i = 0; i < 4; i++) {
+			mx = x + dx[i];
+			my = y + dy[i];
+			if (mx < 0 || mx >= N || my < 0 || my >= M) continue;
+			if (board[mx][my] != 0)continue;
+			board[mx][my] = 2;
+			t_virus.push({ mx, my });
+		}
+	}
+	int ret = 0;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			if (board[i][j] == 0)ret++;
+		}
+	}
+	ans = max(ans, ret);
+}
+void makeWall(int idx, int cnt, vector<vector<int>> board) {
+	if (cnt == 3) {
+		spread(board);
+		return;
+	}
+	if (idx == vacant.size()) return;
+	int x = vacant[idx].first;
+	int y = vacant[idx].second;
+	board[x][y] = 1;
+	makeWall(idx + 1, cnt + 1, board);
+	board[x][y] = 0;
+	makeWall(idx + 1, cnt, board);
+}
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	cin >> N >> M;
+	for (int i = 0; i < N; i++) {
+		for (int j = 0; j < M; j++) {
+			cin >> board[i][j];
+			if (board[i][j] == 0) vacant.push_back({ i,j });
+			if (board[i][j] == 2) virus.push({ i,j });
+		}
+	}
+	makeWall(0, 0, board);
+	cout << ans << endl;
+}
+*/

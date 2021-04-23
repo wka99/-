@@ -6,6 +6,8 @@ using namespace std;
 
 int N, M;
 vector<vector<int>> edge;
+//underflow 발생 가능성이 있으므로 벨만포드의 경우 거리 저장 배열의 자료형을 long long으로 해놓자
+//마음 편하게
 /*
 underflow가 발생할 수 있어 자료형을 long long으로 선언해주어야 한다
 음수 사이클이 존재하게 되면 끝없이 최소값을 갱신하게 되며

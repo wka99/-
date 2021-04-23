@@ -23,3 +23,32 @@ int main() {
 	}
 	cout << maxV << "\n";
 }
+/*
+#include <iostream>
+#include <algorithm>
+using namespace std;
+#define MAX_N 501
+
+int triangle[MAX_N];
+int N;
+int main() {
+	cin >> N;
+	int cnt = 1;
+	for (int i = 0; i < N; i++) {
+		int tmp[MAX_N];
+		for (int j = 0; j < cnt; j++) {
+			cin >> tmp[j];
+		}
+		for (int j = 0; j < cnt; j++) {
+			if (j == 0) tmp[j] = triangle[j] + tmp[j];
+			else if (j == cnt - 1)tmp[j] = triangle[j-1] + tmp[j];
+			else {
+				tmp[j] = max(triangle[j - 1], triangle[j]) + tmp[j];
+			}
+		}
+		for (int j = 0;j < N; j++) triangle[j] = tmp[j];
+		cnt++;
+	}
+	cout << *max_element(triangle, triangle + N) << endl;
+}
+*/

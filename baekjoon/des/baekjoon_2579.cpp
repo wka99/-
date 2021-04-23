@@ -3,6 +3,8 @@ using namespace std;
 #define MAX_N 301
 
 int stair[MAX_N];
+//dp[x][0] => x번째 계단을 연속 1번 밟은 경우 최대값
+//dp[x][1]=> x번째 계단을 연속 2번 밟은 경우 최대값
 int dp[MAX_N][2] = { 0, }; //dp[x][1]=> 2개 연속
 
 int main() {

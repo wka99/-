@@ -1,68 +1,64 @@
 #include <iostream>
 #include <queue>
+#include <vector>
 using namespace std;
+#define MAX 51
 //bfs
-
-int map[51][51];
-int visited[51][51] = { 0, };
-int timev[1000000] = { 0, };
-vector<pair<int, int>> water;
-pair<int, int> bev;
-pair<int, int> go;
-int R, C;
+int map[MAX][MAX] = { 0, };
+int visited[MAX][MAX] = { 0, };
+int timev[MAX * MAX] = { 0, };
 int dx[4] = { -1,1,0,0 };
 int dy[4] = { 0,0,-1,1 };
-int minT = 2500;
+pair<int, int> bev;
+pair<int, int> start;
+vector<pair<int, int>> water;
+int R, C;
 
-void waterSpread() {
-	int s = water.size();
+void spread() {
+	int size = water.size();
 	int x, y, mx, my;
-	for (int i = 0; i < s; i++) {
-		x = water[i].first;
-		y = water[i].second;
+	for (int i = 0; i < size; i++) {
+		x = water[i].first; y = water[i].second;
 		for (int j = 0; j < 4; j++) {
 			mx = x + dx[j];
 			my = y + dy[j];
 			if (mx < 0 || mx >= R || my < 0 || my >= C) continue;
-			if (map[mx][my] == 0 && !(mx == bev.first && my == bev.second)) {
+			if (!map[mx][my] && !(bev.first == mx && bev.second == my)) {
 				map[mx][my] = 1;
 				water.push_back({ mx,my });
 			}
 		}
 	}
 }
-void BFS() {
-	queue<pair<int, int>> gowhere;
-	int x = go.first, y = go.second;
-	gowhere.push({ x, y });
-	visited[x][y] = 1;
-	int mx, my, cnt = 0, flag = 0;
-	while (!gowhere.empty()) {
-		x = gowhere.front().first;
-		y = gowhere.front().second;
+void bfs() {
+	queue<pair<int, int>> q;
+	q.push({ start.first, start.second });
+	visited[start.first][start.second] = 1;
+	int x, y, mx, my;
+	while (!q.empty()) {
+		x = q.front().first;
+		y = q.front().second;
+		q.pop();
+		//bfs 이므로 가장 처음으로 도착한 것이 최단
 		if (x == bev.first && y == bev.second) {
 			cout << visited[x][y] - 1 << endl;
-			flag = 1;
 			return;
 		}
-		gowhere.pop();
 		if (!timev[visited[x][y]]) {
 			timev[visited[x][y]] = 1;
-			waterSpread();
+			spread();
 		}
 		for (int i = 0; i < 4; i++) {
 			mx = x + dx[i];
 			my = y + dy[i];
 			if (mx < 0 || mx >= R || my < 0 || my >= C) continue;
-			if (!visited[mx][my] && map[mx][my] == 0) { //빈칸으로만 이동 가능
+			if (!visited[mx][my] && !map[mx][my]) {
 				visited[mx][my] = visited[x][y] + 1;
-				gowhere.push({ mx, my });
+				q.push({ mx, my });
 			}
 		}
 	}
-	if (!flag) {
-		cout << "KAKTUS" << endl;
-	}
+	cout << "KAKTUS\n";
 }
 int main() {
 	char c;
@@ -70,25 +66,20 @@ int main() {
 	for (int i = 0; i < R; i++) {
 		for (int j = 0; j < C; j++) {
 			cin >> c;
-			if (c == 'D') { //비버의 집 => 목적지
-				map[i][j] = 0;
-				bev = { i,j };
-			}
-			else if (c == 'S') { //고슴도치 위치
-				map[i][j] = 0;
-				go = { i,j };
-			}
-			else if (c == '*') { //물
-				map[i][j] = 1;
+			if (c == '*') {
 				water.push_back({ i,j });
+				map[i][j] = 1;
 			}
-			else if (c == 'X') { //돌
-				map[i][j] = 2;
+			else if (c == 'X') map[i][j] = 2;
+			else if (c == 'D') {
+				bev.first = i;
+				bev.second = j;
 			}
-			else { //빈칸
-				map[i][j] = 0;
+			else if (c == 'S') {
+				start.first = i;
+				start.second = j;
 			}
 		}
 	}
-	BFS();
+	bfs();
 }

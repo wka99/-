@@ -1,56 +1,31 @@
 #include <iostream>
 #include <string>
-#include <vector>
-#include <cstring>
+#include <algorithm>
 using namespace std;
+#define MAX_N 1000001
+#define MAX_K 11
 
-vector<pair<int, int>> peop;
-int visited[5][5];
-int dx[4] = { -1,1,0,0 };
-int dy[4] = { 0,0,-1,1 };
+string N;
+int K;
+int dp[MAX_N][MAX_K];
 
-bool check(int x, int y, vector<string> p, int cnt) {
-    if (p[x][y] == 'P' && cnt <= 2) return 0;
-    int mx, my;
-    for (int i = 0; i < 4; i++) {
-        mx = x + dx[i];
-        my = y + dy[i];
-        if (mx < 0 || my < 0 || mx >= 5 || my >= 5) continue;//범위밖
-        if (p[mx][my] == 'X') continue;//막힌곳
-        if (!visited[mx][my]) {
-            visited[mx][my] = 1;
-            check(mx, my, p, cnt + 1);
-            visited[mx][my] = 0;
-        }
-    }
-    return 1;
-}
-vector<int> solution(vector<vector<string>> places) {
-    vector<int> answer;
-    for (int i = 0; i < places.size(); i++) {
-        for (int j = 0; j < places[i].size(); j++) {
-            for (int k = 0; k < places[i][j].size(); j++) {
-                if (places[i][j][k] == 'P') peop.push_back({ j,k });
-            }
-        }
-        int flag = 0;
-        for (int j = 0; j < peop.size(); j++) {
-            if (!check(peop[j].first, peop[j].second, places[i], 0)) {
-                flag = 1;
-                break;
-            }
-        }
-        if (flag) answer.push_back(0);
-        else answer.push_back(1);
-        peop.clear();
-        memset(visited, 0, sizeof(visited));
-    }
-    return answer;
+int makeBig(string curr, int cnt) {
+	int ctoi = stoi(curr);
+	if (cnt == 0) return ctoi;
+	if (dp[ctoi][cnt]) return dp[ctoi][cnt];
+	int ret = -1;
+	string tmp = curr;
+	for (int i = 0; i < tmp.length() - 1; i++) {
+		for (int j = i + 1; j < tmp.length(); j++) {
+			if (i==0 && tmp[j] == '0') continue;
+			swap(tmp[i], tmp[j]);
+			ret = max(ret, makeBig(tmp, cnt - 1));
+			tmp = curr;
+		}
+	}
+	return dp[ctoi][cnt] = ret;
 }
 int main() {
-    solution({ {"POOOP", "OXXOX", "OPXPX", "OOXOX", "POXXP"},
-        {"POOPX", "OXPXP", "PXXXO", "OXXXO", "OOOPP"},
-        {"PXOPX", "OXOXP", "OXPXX", "OXXXP", "POOXX"},
-        {"OOOXX", "XOOOX", "OOOXX", "OXOOX", "OOOOO"},
-        {"PXPXP", "XPXPX", "PXPXP", "XPXPX", "PXPXP"} });
+	cin >> N >> K;
+	cout<<makeBig(N, K);
 }

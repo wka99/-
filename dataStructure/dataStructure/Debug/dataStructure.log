@@ -1,4 +1,4 @@
 ﻿  소스1.cpp
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\datastructure\datastructure\소스1.cpp(13): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-c:\users\yooso\desktop\유소영\멋해\플밍\c++연습_baekjoon\datastructure\datastructure\소스1.cpp(28): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\dataStructure\dataStructure\소스1.cpp(46,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\dataStructure\dataStructure\소스1.cpp(49,20): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   dataStructure.vcxproj -> C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\dataStructure\Debug\dataStructure.exe

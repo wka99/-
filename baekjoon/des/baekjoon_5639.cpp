@@ -42,3 +42,34 @@ int main() {
 		cout << postTree[i] << "\n";
 	}
 }
+/*
+#include <iostream>
+using namespace std;
+#define MAX 10001
+
+int preorder[MAX]; //전위 순회
+int postorder[MAX]; //후위 순회
+int N = 0; //원소의 개수
+int idx = 0;
+
+void pre2post(int from, int to) {
+	if (from > to || from >= N || to >= N || idx == -1) return;
+	int root = preorder[from], i;
+	postorder[idx] = root; idx--; //V
+	for (i = from + 1; i <= to; i++) {
+		if (preorder[i] > root) break;
+	}
+	pre2post(i, to); //R
+	pre2post(from + 1, i - 1);//L
+}
+int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
+	while (cin >> preorder[N++]); N--;
+	idx = N - 1;
+	pre2post(0, N - 1);
+	for (int i = 0; i < N; i++) {
+		cout << postorder[i] << "\n";
+	}
+}
+*/

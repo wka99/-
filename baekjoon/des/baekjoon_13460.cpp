@@ -12,6 +12,7 @@ public:
 int N, M;
 INFO start;
 char map[MAX_N][MAX_N];
+//빨간 구슬, 파란 구슬의 위치가 모두 같은 경우, 같은 이동 방법만 나오게 된다.
 int visited[MAX_N][MAX_N][MAX_N][MAX_N];
 int dx[4] = { -1,1,0,0 };
 int dy[4] = { 0,0,-1,1 };

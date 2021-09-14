@@ -1,161 +1,152 @@
 #include <iostream>
 #include <vector>
 using namespace std;
-#define MAX_N 21
 
 int N;
-vector<vector<int>> map(MAX_N, vector<int>(MAX_N, 0));
-int ans = 0;
+vector<vector<int>> board;
+int maxV = 0;
 
-void UP(vector<vector<int>> map, vector<vector<int>>& ret) {
-	for (int x = 0; x < N; x++) {
-		vector<int> newlines;
+/*
+	최대 5번 이동시켜서 얻을 수 있는 가장 큰 블록
+	1. 같은 값을 가지는 두 블록이 충돌하면 하나로 합쳐짐
+	2. 이미 합쳐진 블록은 다른 블록과 합쳐질 수 없음
+*/
+
+vector<vector<int>> UP(vector<vector<int>> curr) {
+	vector<vector<int>> ret(N, (vector<int>(N, 0)));
+	for (int i = 0; i < N; i++) {
+		vector<int> tmp;
 		int flag = 0;
-		for (int y = 0; y < N; y++) {
-			if (map[y][x] == 0) continue;
-			if (!flag) {
-				newlines.push_back(map[y][x]);
-				flag = 1;
-			}
-			else {
-				int f = newlines[newlines.size() - 1];
-				newlines.pop_back();
-				if (f == map[y][x]) {
-					f += map[y][x];
-					newlines.push_back(f);
-					flag = 0;
+		for (int j = 0; j < N; j++) {
+			if (curr[j][i] == 0) continue;
+			if (!tmp.empty()) {
+				if (!flag && tmp[tmp.size() - 1] == curr[j][i]) {
+					tmp[tmp.size() - 1] += curr[j][i];
+					flag = 1;
 				}
 				else {
-					newlines.push_back(f);
-					newlines.push_back(map[y][x]);
-				}
-			}
-		}
-		int idx = 0;
-		for (int z = 0; z < newlines.size(); z++) {
-			ret[idx++][x] = newlines[z];
-		}
-	}
-}
-void DOWN(vector<vector<int>> map, vector<vector<int>>& ret) {
-	for (int x = 0; x < N; x++) {
-		vector<int> newlines;
-		int flag = 0;
-		for (int y = N - 1; y >= 0; y--) {
-			if (map[y][x] == 0) continue;
-			if (!flag) {
-				newlines.push_back(map[y][x]);
-				flag = 1;
-			}
-			else {
-				int f = newlines[newlines.size() - 1];
-				newlines.pop_back();
-				if (f == map[y][x]) {
-					f += map[y][x];
-					newlines.push_back(f);
+					tmp.push_back(curr[j][i]);
 					flag = 0;
 				}
-				else {
-					newlines.push_back(f);
-					newlines.push_back(map[y][x]);
-				}
-			}
-		}
-		int idx = N - 1;
-		for (int z = 0; z < newlines.size(); z++) {
-			ret[idx--][x] = newlines[z];
-		}
-	}
-}
-void LEFT(vector<vector<int>> map, vector<vector<int>>& ret) {
-	for (int x = 0; x < N; x++) {
-		vector<int> newlines;
-		int flag = 0;
-		for (int y = 0; y < N; y++) {
-			if (map[x][y] == 0) continue;
-			if (!flag) {
-				newlines.push_back(map[x][y]);
-				flag = 1;
 			}
 			else {
-				int f = newlines[newlines.size() - 1];
-				newlines.pop_back();
-				if (f == map[x][y]) {
-					f += map[x][y];
-					newlines.push_back(f);
-					flag = 0;
-				}
-				else {
-					newlines.push_back(f);
-					newlines.push_back(map[x][y]);
-				}
+				tmp.push_back(curr[j][i]);
+				flag = 0;
 			}
 		}
-		int idx = 0;
-		for (int z = 0; z < newlines.size(); z++) {
-			ret[x][idx++] = newlines[z];
-		}
+		for (int j = 0; j < tmp.size(); j++)
+			ret[j][i] = tmp[j];
 	}
+	return ret;
 }
-void RIGHT(vector<vector<int>> map, vector<vector<int>>& ret) {
-	for (int x = 0; x < N; x++) {
-		vector<int> newlines;
+vector<vector<int>> DOWN(vector<vector<int>> curr) {
+	vector<vector<int>> ret(N, (vector<int>(N, 0)));
+	for (int i = 0; i < N; i++) {
+		vector<int> tmp;
 		int flag = 0;
-		for (int y = N - 1; y >= 0; y--) {
-			if (map[x][y] == 0) continue;
-			if (!flag) {
-				newlines.push_back(map[x][y]);
-				flag = 1;
+		for (int j = N - 1; j >= 0; j--) {
+			if (curr[j][i] == 0) continue;
+			if (!tmp.empty()) {
+				if (!flag && tmp[tmp.size() - 1] == curr[j][i]) {
+					tmp[tmp.size() - 1] += curr[j][i];
+					flag = 1;
+				}
+				else {
+					tmp.push_back(curr[j][i]);
+					flag = 0;
+				}
 			}
 			else {
-				int f = newlines[newlines.size() - 1];
-				newlines.pop_back();
-				if (f == map[x][y]) {
-					f += map[x][y];
-					newlines.push_back(f);
-					flag = 0;
-				}
-				else {
-					newlines.push_back(f);
-					newlines.push_back(map[x][y]);
-				}
+				tmp.push_back(curr[j][i]);
+				flag = 0;
 			}
 		}
-		int idx = N - 1;
-		for (int z = 0; z < newlines.size(); z++) {
-			ret[x][idx--] = newlines[z];
-		}
+		for (int j = 0; j < tmp.size(); j++)
+			ret[N - j - 1][i] = tmp[j];
 	}
+	return ret;
 }
-void play(int move,  vector<vector<int>> map) {
-	if (move == 5) {
+vector<vector<int>> LEFT(vector<vector<int>> curr) {
+	vector<vector<int>> ret(N, (vector<int>(N, 0)));
+	for (int i = 0; i < N; i++) {
+		vector<int> tmp;
+		int flag = 0;
+		for (int j = 0; j < N; j++) {
+			if (curr[i][j] == 0) continue;
+			if (!tmp.empty()) {
+				if (!flag && tmp[tmp.size() - 1] == curr[i][j]) {
+					tmp[tmp.size() - 1] += curr[i][j];
+					flag = 1;
+				}
+				else {
+					tmp.push_back(curr[i][j]);
+					flag = 0;
+				}
+			}
+			else {
+				tmp.push_back(curr[i][j]);
+				flag = 0;
+			}
+		}
+		for (int j = 0; j < tmp.size(); j++)
+			ret[i][j] = tmp[j];
+	}
+	return ret;
+}
+vector<vector<int>> RIGHT(vector<vector<int>> curr) {
+	vector<vector<int>> ret(N, (vector<int>(N, 0)));
+	for (int i = 0; i < N; i++) {
+		vector<int> tmp;
+		int flag = 0;
+		for (int j = N - 1; j >= 0; j--) {
+			if (curr[i][j] == 0) continue;
+			if (!tmp.empty()) {
+				if (!flag && tmp[tmp.size() - 1] == curr[i][j]) {
+					tmp[tmp.size() - 1] += curr[i][j];
+					flag = 1;
+				}
+				else {
+					tmp.push_back(curr[i][j]);
+					flag = 0;
+				}
+			}
+			else {
+				tmp.push_back(curr[i][j]);
+				flag = 0;
+			}
+		}
+		for (int j = 0; j < tmp.size(); j++)
+			ret[i][N - j - 1] = tmp[j];
+	}
+	return ret;
+}
+void play(int cnt, vector<vector<int>> curr) {
+	if (cnt == 5) {
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
-				ans = max(ans, map[i][j]);
+				maxV = max(maxV, curr[i][j]);
 			}
 		}
 		return;
 	}
-	for (int i = 0; i < 4; i++) {
-		vector<vector<int>> ret(N, vector<int>(N, 0));
-		if (i == 0) UP(map, ret);
-		else if (i == 1) DOWN(map, ret);
-		else if (i == 2) LEFT(map, ret);
-		else if (i == 3) RIGHT(map, ret);
-		play(move + 1, ret);
-	}
+	play(cnt + 1, UP(curr));
+	play(cnt + 1, DOWN(curr));
+	play(cnt + 1, LEFT(curr));
+	play(cnt + 1, RIGHT(curr));
 }
 int main() {
-	int num;
 	ios_base::sync_with_stdio(false);
 	cin.tie(NULL); cout.tie(NULL);
 	cin >> N;
+	int num;
 	for (int i = 0; i < N; i++) {
+		vector<int> tmp;
 		for (int j = 0; j < N; j++) {
 			cin >> num;
-			map[i][j] = num;
+			tmp.push_back(num);
 		}
+		board.push_back(tmp);
 	}
-	play(0, map);
-	cout << ans << endl;
+	play(0, board);
+	cout << maxV << endl;
 }

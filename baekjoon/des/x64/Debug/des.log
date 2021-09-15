@@ -1,0 +1,111 @@
+﻿  baekjoon_1010.cpp
+  baekjoon_1018.cpp
+  baekjoon_10211.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_10211.cpp(8,18): warning C4101: 'maxidx' :참조되지 않은 지역 변수입니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_10211.cpp(8,12): warning C4101: 'maxv' :참조되지 않은 지역 변수입니다.
+  baekjoon_1039.cpp
+  baekjoon_1062.cpp
+  baekjoon_10714.cpp
+  baekjoon_1072.cpp
+  baekjoon_1074.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(24,21): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(28,21): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(32,21): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(36,21): warning C4244: '+=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(41,14): warning C4244: '=': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(42,24): warning C4101: 'my' :참조되지 않은 지역 변수입니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1074.cpp(42,20): warning C4101: 'mx' :참조되지 않은 지역 변수입니다.
+  baekjoon_10816.cpp
+  baekjoon_11003.cpp
+  baekjoon_1102.cpp
+  baekjoon_1103.cpp
+  baekjoon_11049.cpp
+  baekjoon_11051.cpp
+  baekjoon_11062.cpp
+  baekjoon_11279.cpp
+  baekjoon_11404.cpp
+  baekjoon_11657.cpp
+  baekjoon_11659.cpp
+  baekjoon_11660.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  baekjoon_11694.cpp
+  baekjoon_11724.cpp
+  baekjoon_11726.cpp
+  baekjoon_1197.cpp
+  baekjoon_12100.cpp
+  baekjoon_1256.cpp
+  baekjoon_1269.cpp
+  baekjoon_1275.cpp
+  baekjoon_12852.cpp
+  baekjoon_13460.cpp
+  baekjoon_14499(2).cpp
+  baekjoon_1676.cpp
+  baekjoon_17142.cpp
+  baekjoon_18222.cpp
+  baekjoon_1946.cpp
+  baekjoon_20055.cpp
+  baekjoon_2166.cpp
+  baekjoon_2504.cpp
+  baekjoon_2592.cpp
+  baekjoon_3190.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  CJ1.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ1.cpp(21,33): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ1.cpp(22,39): warning C4244: '인수': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CJ2.cpp
+  CJ3.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ3.cpp(24,29): warning C4244: '+=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ3.cpp(25,40): warning C4244: '인수': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  CJ_R1C_1.cpp
+  CJ_R1C_2.cpp
+  CJ_R1_1.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_1.cpp(43,51): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_1.cpp(56,33): warning C4267: '+=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_1.cpp(33,15): warning C4101: 'append' :참조되지 않은 지역 변수입니다.
+  CJ_R1_2.cpp
+  CJ_R1_3.cpp
+  소스.cpp
+  baekjoon_13251.cpp
+  baekjoon_1062(2).cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(32,31): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(39,26): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(40,26): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(41,26): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(42,26): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1062(2).cpp(43,26): warning C4554: '<<': 연산자 우선 순위에 오류가 있는지 확인하세요. 괄호를 사용하여 우선 순위를 명확하게 지정하세요.
+  baekjoon_13711.cpp
+  baekjoon_10989.cpp
+  baekjoon_14003.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_14003.cpp(23,25): warning C4267: '=': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_14003.cpp(35,16): warning C4244: '=': '__int64'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_14003.cpp(38,21): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_14003.cpp(47,2): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  baekjoon_1463.cpp
+  baekjoon_1516.cpp
+  baekjoon_15652.cpp
+  baekjoon_15654.cpp
+  baekjoon_15663.cpp
+  baekjoon_15664.cpp
+  코드를 생성하고 있습니다...
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\CJ_R1_3.cpp(6): warning C4700: 초기화되지 않은 'T' 지역 변수를 사용했습니다.
+  컴파일하고 있습니다...
+  baekjoon_1572.cpp
+C:\Users\yooso\Desktop\유소영\멋해\플밍\c++연습_baekjoon\baekjoon\des\baekjoon_1572.cpp(33,6): warning C4101: 't' :참조되지 않은 지역 변수입니다.
+  baekjoon_1655.cpp
+  baekjoon_1713.cpp
+  baekjoon_17144.cpp
+  baekjoon_1722.cpp
+  baekjoon_1753.cpp
+  baekjoon_1806.cpp
+  baekjoon_1837.cpp
+  baekjoon_1854.cpp
+  baekjoon_1865.cpp
+  baekjoon_18870.cpp
+  baekjoon_1922.cpp
+  baekjoon_1927.cpp
+  baekjoon_1932.cpp
+  baekjoon_1958.cpp
+  baekjoon_1991.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(632,5): warning MSB4220: 현재 실행 중인 "CL" 작업이 취소되기를 기다리고 있습니다.

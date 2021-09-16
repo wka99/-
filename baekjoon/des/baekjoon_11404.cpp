@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 #define MAX_N 101
-#define INF 1000000000
+#define INF 10000001
 int N, M;
 int bus[MAX_N][MAX_N];
 

@@ -21,6 +21,7 @@ int main() {
 	for (int k = 1; k <= N; k++) { //중간
 		for (int i = 1; i <= N; i++) { //출발
 			for (int j = 1; j <= N; j++) { //도착
+				//i,k 경로와 k,j 경로가 존재하면 i에서 j로 가는 경로가 존재한다.
 				if (d[i][k] && d[k][j])
 					d[i][j] = 1;
 			}

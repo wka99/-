@@ -4,7 +4,14 @@
 using namespace std;
 #define MAX_V 20001
 #define INF 3000001
-
+/*
+	플로이드 워셜의 경우
+	최대 20000^3 = 8000000000 연산 필요, 제한 시간내 해결 불가
+	 + 메모리 초과
+	벨만 포드의 경우
+	최대 20000*300000 = 6000000000 연산 필요, 제한 시간내 해결 불가
+	따라서 dijkstra 사용
+*/
 int V, E, K;
 priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 vector<pair<int, int>>grph[MAX_V];

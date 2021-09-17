@@ -2,46 +2,52 @@
 #include <vector>
 #include <queue>
 using namespace std;
-#define MAX 20001
-#define INF 200001
-typedef pair<int, int> pii;
+#define MAX 101
+#define MAX_X 10001
 
-int V, E, K;
-int dist[MAX];
-vector<pii>grph[MAX];
+//우, 하, 좌, 상
+int dx[4] = { 0,1,0,-1 };
+int dy[4] = { 1,0,-1,0 };
+int map[MAX][MAX];
+char d_switch[MAX_X];
+queue<pair<int, int>> snake;
+int N, K, L;
 
-void dijkstra() {
-	priority_queue<pii, vector<pii>, greater<pii>>pq;
-	dist[K] = 0;//시작점
-	pq.push({ 0,K });
-	while (!pq.empty()) {
-		int cost = pq.top().first;
-		int node = pq.top().second;
-		pq.pop();
-		if (dist[node] < cost) continue; //이미 더 작음
-		for (int i = 0; i < grph[node].size(); i++) {
-			int n_cost = grph[node][i].first;
-			int n_node = grph[node][i].second;
-			if (dist[n_node] > cost + n_cost) {
-				dist[n_node] = cost + n_cost;
-				pq.push({ cost + n_cost, n_node });
-			}
-		}
+void play(int hx, int hy, int dir, int time) {
+	//벽에 닿거나 몸에 닿는 경우, 게임 종료
+	if (hx<1 || hx> N || hy<1 || hy> N || map[hx][hy] == 2) {
+		cout << time << "\n";
+		return;
 	}
+	if (d_switch[time] == 'L') dir = (dir - 1 + 4) % 4;
+	else if (d_switch[time] == 'D') dir = (dir + 1) % 4;
+	if (map[hx][hy] == 1) { //사과 먹음
+		snake.push({ hx,hy });
+		map[hx][hy] = 2;
+	}
+	else { //사과 없음
+		int x = snake.front().first;
+		int y = snake.front().second;
+		map[x][y] = 0;
+		snake.pop(); //꼬리 비우기
+		snake.push({ hx,hy });
+		map[hx][hy] = 2;
+	}
+	play(hx + dx[dir], hy + dy[dir], dir, time + 1);
 }
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
-	int u, v, w;
-	cin >> V >> E >> K;
-	for (int i = 0; i < E; i++) {
-		cin >> u >> v >> w;
-		grph[u].push_back({ w, v });
+	int x, y;
+	char c;
+	cin >> N >> K;
+	for (int i = 0; i < K; i++) {
+		cin >> x >> y;
+		map[x][y] = 1;
 	}
-	for (int i = 1; i <= V; i++) dist[i] = INF;
-	dijkstra();
-	for (int i = 1; i <= V; i++) {
-		if (dist[i] == INF) cout << "INF\n";
-		else cout << dist[i] << "\n";
+	cin >> L;
+	for (int i = 0; i < L; i++) {
+		cin >> x >> c;
+		d_switch[x] = c;
 	}
+	snake.push({ 1,1 });
+	play(1, 1, 0, 0);
 }

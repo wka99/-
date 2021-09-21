@@ -1,51 +1,47 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
 using namespace std;
+#define MAX 21
 
 int N;
-int statis[21][21];
-vector <int> link;
-vector <int> start;
+int point[MAX][MAX];
+int visited[MAX];
+int ans = 2001;
+//스타트 팀과 링크 팀의 능력치의 차이의 최솟값
 
-int check(int cur, int ind) {
-	int t1 = 0;
-	int t2 = 0;
-	if (ind == N / 2) {
-		for (int i = 0; i < link.size(); i++) {
-			for (int j = 0; j < link.size(); j++) {
-				if (i == j)continue;
-				t1 += statis[link[i]][link[j]];
+void makeTeam(int idx, int cnt) {
+	if (cnt == N / 2) {
+		int start = 0, link = 0;
+		for (int i = 0; i < N; i++) {
+			for (int j = i + 1; j < N; j++) {
+				if (i == j) continue;
+				if (visited[i] && visited[j]) {
+					start += point[i][j];
+					start += point[j][i];
+				}
+				else if (!visited[i] && !visited[j]) {
+					link += point[i][j];
+					link += point[j][i];
+				}
 			}
 		}
-		for (int i = 0; i < start.size(); i++) {
-			for (int j = 0; j < start.size(); j++) {
-				if (i == j)continue;
-				t2 += statis[start[i]][start[j]];
-			}
-		}
-		return abs(t1 - t2);
+		ans = min(ans, abs(start - link));
+		return;
 	}
-	int ans = -1;
-	for (int i = cur; i < start.size(); i++) {
-		int tmp = start[i];
-		link.push_back(tmp);
-		start.erase(start.begin() + i);
-		t1 = check(i, ind + 1);
-		link.pop_back();
-		start.insert(start.begin() + i, tmp);
-		if (ans == -1 || (t1 != -1 && ans > t1))
-			ans = t1;
-	}
-	return ans;
+	if (idx == N) return;
+	visited[idx] = 1;
+	makeTeam(idx + 1, cnt + 1);
+	visited[idx] = 0;
+	makeTeam(idx + 1, cnt);
 }
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin >> N;
 	for (int i = 0; i < N; i++) {
-		start.push_back(i);
 		for (int j = 0; j < N; j++) {
-			cin >> statis[i][j];
+			cin >> point[i][j];
 		}
 	}
-	cout << check(0, 0);
+	makeTeam(0, 0);
+	cout << ans << endl;
 }

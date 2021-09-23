@@ -35,8 +35,9 @@ int main() {
 			idx[i] = it - LIS.begin();
 		}
 	}
-	int sz = LIS.size();
-	sz--;
+	//lis를 뒤에서부터 구해야 하는 이유
+	//[반례] 7 1 3 4 3 5 6
+	int sz = LIS.size() - 1;
 	for (int i = N - 1; i >= 0; i--) {
 		if (sz == idx[i]) {
 			ans.push_back(nums[i]);

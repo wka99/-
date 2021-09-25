@@ -1,28 +1,42 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <stack>
 using namespace std;
 
-vector<int> lis;
-int A[40001];
-int N;
+int N, ans = 0;
+int arr[1001];
+stack<int> st;
 
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	ios::sync_with_stdio(0);
+	cin.tie(0);
 	cin >> N;
-	for (int i = 0; i < N; i++) cin >> A[i];
+	int p, l;
+	int maxV = 0, idx;
+	int low = 1001, high = 0;
 	for (int i = 0; i < N; i++) {
-		if (lis.empty()) {
-			lis.push_back(A[i]);
-		}
-		else {
-			if (lis.back() < A[i])lis.push_back(A[i]);
-			else {
-				vector<int>::iterator it = lower_bound(lis.begin(), lis.end(), A[i]);
-				*it = A[i];
-			}
+		cin >> p >> l;
+		if (low > p) low = p;
+		if (high < p) high = p;
+		arr[p] = l;
+		if (maxV < l) {
+			maxV = l;
+			idx = p;
 		}
 	}
-	cout << lis.size() << endl;
+	for (int i = low; i <= idx; i++) {
+		if (arr[i]) {
+			if (st.empty())st.push(arr[i]);
+			else if (arr[i] > st.top())st.push(arr[i]);
+		}
+		ans += st.top();
+	}
+	while (!st.empty()) st.pop();
+	for (int i = high; i > idx; i--) {
+		if (arr[i]) {
+			if (st.empty())st.push(arr[i]);
+			else if (arr[i] > st.top())st.push(arr[i]);
+		}
+		ans += st.top();
+	}
+	cout << ans << endl;
 }

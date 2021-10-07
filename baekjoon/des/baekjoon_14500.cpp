@@ -1,69 +1,68 @@
 #include <iostream>
 using namespace std;
+#define MAX 501
 
+int visited[MAX][MAX];
+int board[MAX][MAX];
 int N, M;
-int tetro[501][501];
-int visit[501][501] = { 0, };
-int dx[4] = { 0,0,-1,1 }; //是, 焼掘
-int dy[4] = { -1,1,0,0 }; //図, 神
-int maxval = 0;
+int ans = 0;
+int dx[4] = { -1,1,0,0 };
+int dy[4] = { 0,0,-1,1 };
 
-void check(int x, int y, int sum, int cnt) {
-	if (visit[x][y]) return;
+void findMax(int x, int y, int cnt, int sum) {
 	if (cnt == 4) {
-		if (maxval < sum)
-			maxval = sum;
+		ans = max(ans, sum);
 		return;
 	}
 	int mx, my;
-	visit[x][y] = 1;
 	for (int i = 0; i < 4; i++) {
 		mx = x + dx[i];
 		my = y + dy[i];
-		if (mx >= 0 && mx < N&&my >= 0 && my < M)
-			check(mx, my, sum+ tetro[x][y], cnt+1);
+		if (mx < 0 || mx >= N || my < 0 || my >= M)continue;
+		if (visited[mx][my])continue;
+		visited[mx][my] = 1;
+		findMax(mx, my, cnt + 1, sum + board[mx][my]);
+		visited[mx][my] = 0;
 	}
-	visit[x][y] = 0;
 }
-void excep(int x, int y) {
-	int sum = 0;
-	//1) で
-	if (y + 2 < M&&x - 1 >= 0) {
-		sum = tetro[x][y] + tetro[x][y + 1] + tetro[x][y + 2] + tetro[x - 1][y + 1];
-		if (maxval < sum)
-			maxval = sum;
+void except(int x, int y) {
+	//た
+	if (x + 2 < N && y + 1 < M) {
+		int sum = board[x][y] + board[x + 1][y] + board[x + 2][y] + board[x + 1][y + 1];
+		ans = max(sum, ans);
 	}
-	//2) ぬ
-	if (y + 2 < M&&x + 1 < N) {
-		sum = tetro[x][y] + tetro[x][y + 1] + tetro[x][y + 2] + tetro[x + 1][y + 1];
-		if (maxval < sum)
-			maxval = sum;
+	//っ
+	if (x + 2 < N && y - 1 >= 0) {
+		int sum = board[x][y] + board[x + 1][y] + board[x + 2][y] + board[x + 1][y - 1];
+		ans = max(sum, ans);
 	}
-	//3) っ
-	if (y - 1 >=0&&x + 2 < N) {
-		sum = tetro[x][y] + tetro[x + 1][y] + tetro[x + 2][y] + tetro[x + 1][y - 1];
-		if (maxval < sum)
-			maxval = sum;
+	//で
+	if (x - 1 >= 0 && y + 2 < M) {
+		int sum = board[x][y] + board[x - 1][y + 1] + board[x][y + 1] + board[x][y + 2];
+		ans = max(sum, ans);
 	}
-	//4) た
-	if (y + 1 < M&&x + 2 < N) {
-		sum = tetro[x][y] + tetro[x + 1][y] + tetro[x + 2][y] + tetro[x + 1][y + 1];
-		if (maxval < sum)
-			maxval = sum;
+	//ぬ
+	if (x + 1 < N && y + 2 < M) {
+		int sum = board[x][y] + board[x + 1][y + 1] + board[x][y + 1] + board[x][y + 2];
+		ans = max(sum, ans);
 	}
 }
 int main() {
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL); cout.tie(NULL);
 	cin >> N >> M;
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
-			cin >> tetro[i][j];
+			cin >> board[i][j];
 		}
 	}
 	for (int i = 0; i < N; i++) {
 		for (int j = 0; j < M; j++) {
-			check(i, j, 0, 0);
-			excep(i, j);
+			visited[i][j] = 1;
+			findMax(i, j, 1, board[i][j]);
+			except(i, j);
+			visited[i][j] = 0;
 		}
 	}
-	cout << maxval << endl;
+	cout << ans << endl;
 }

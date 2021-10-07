@@ -1,14 +1,16 @@
 #include <iostream>
 using namespace std;
-#define MAX 2001
+#define MAX 16
 
+int dp[MAX];//x일까지 얻을 수 있는 최대 수입
 int N;
-int A[MAX];
-long long dp[MAX][MAX][2];//남은 케익의 범위가 x~y, 0: JOI, 1:IOI
-
 int main() {
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL); cout.tie(NULL);
+	int t, p;
 	cin >> N;
-	for (int i = 0; i < N; i++) cin >> A[i];
+	for (int i = 1; i <= N; i++) {
+		cin >> t >> p;
+		dp[i] = max(dp[i], dp[i - 1]);
+		if (i + t - 1 <= N) dp[i + t - 1] = max(dp[i + t - 1], dp[i - 1] + p);
+	}
+	cout << dp[N] << endl;
 }
